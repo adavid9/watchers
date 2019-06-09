@@ -1,4 +1,4 @@
-package com.dawidantecki.watchers.data.model;
+package com.dawidantecki.watchers.data.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

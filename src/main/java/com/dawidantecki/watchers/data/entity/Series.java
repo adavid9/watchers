@@ -1,16 +1,18 @@
-package com.dawidantecki.watchers.data.model;
+package com.dawidantecki.watchers.data.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ToString
 @Entity
-@Table(name = "episode")
-public class Episode {
+@Table(name = "series")
+public class Series {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +21,26 @@ public class Episode {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "release_date")
+    @Column(name = "country")
+    private String country;
+    @Column(name = "director")
+    private String director;
+    @Column(name = "release")
     @Temporal(TemporalType.DATE)
     private Date release_date;
-    @ManyToOne
-    private Season season;
+    @OneToMany(mappedBy = "series", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @EqualsAndHashCode.Exclude
+    private List<Season> seasons;
 
-    public Episode() {
+    public Series() {
 
     }
 
-    public Episode(String title, String description) {
+    public Series(String title, String description, String country, String director) {
         this.title = title;
         this.description = description;
+        this.country = country;
+        this.director = director;
     }
 
     public Long getId() {
@@ -58,6 +67,22 @@ public class Episode {
         this.description = description;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     public Date getRelease_date() {
         return release_date;
     }
@@ -66,11 +91,11 @@ public class Episode {
         this.release_date = release_date;
     }
 
-    public Season getSeason() {
-        return season;
+    public List<Season> getSeasons() {
+        return seasons;
     }
 
-    public void setSeason(Season season) {
-        this.season = season;
+    public void setSeasons(List<Season> seasons) {
+        this.seasons = seasons;
     }
 }
