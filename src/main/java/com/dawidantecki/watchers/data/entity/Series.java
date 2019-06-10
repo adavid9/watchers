@@ -25,7 +25,7 @@ public class Series {
     private String country;
     @Column(name = "director")
     private String director;
-    @Column(name = "release")
+    @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date release_date;
     @OneToMany(mappedBy = "series", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
