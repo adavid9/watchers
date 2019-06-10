@@ -17,6 +17,8 @@ public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
+    private String name;
     @Column(name = "episodes_no")
     private Integer episodesNo;
     @Column(name = "release_date")
@@ -32,8 +34,17 @@ public class Season {
 
     }
 
-    public Season(Integer episodesNo) {
+    public Season(String name, Integer episodesNo) {
+        this.name = name;
         this.episodesNo = episodesNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -30,6 +31,14 @@ public class SeasonService {
     public void addSeason(Season season) {
         if (season != null)
             seasonRepository.save(season);
+    }
+
+    public void addSeasons(Collection<Season> seasons) {
+        if (seasons.size() > 0)
+            seasons.forEach(x -> {
+                if (x != null)
+                    addSeason(x);
+            });
     }
 
     public void deleteSeasonById(long id) {
