@@ -10,9 +10,9 @@ import spock.lang.Specification
 class SeriesServiceTest extends Specification {
 
     @Autowired
-    SeriesService seriesService
+    private SeriesService seriesService
     @Autowired
-    SeriesRepository seriesRepository
+    private SeriesRepository seriesRepository
 
     def cleanup() {
         seriesRepository.deleteAll()

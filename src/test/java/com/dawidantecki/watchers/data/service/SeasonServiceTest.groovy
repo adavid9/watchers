@@ -10,9 +10,9 @@ import spock.lang.Specification
 class SeasonServiceTest extends Specification {
 
     @Autowired
-    SeasonService seasonService
+    private SeasonService seasonService
     @Autowired
-    SeasonRepository seasonRepository
+    private SeasonRepository seasonRepository
 
     def cleanup() {
         seasonRepository.deleteAll()
