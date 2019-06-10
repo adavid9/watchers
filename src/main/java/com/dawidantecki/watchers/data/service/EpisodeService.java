@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -30,6 +31,14 @@ public class EpisodeService {
     public void addEpisode(Episode episode) {
         if (episode != null)
             episodeRepository.save(episode);
+    }
+
+    public void addEpisodes(Collection<Episode> episodes) {
+        if (episodes.size() > 0)
+            episodes.forEach(x -> {
+                if (x != null)
+                    addEpisode(x);
+            });
     }
 
     public void deleteEpisodeById(long id) {
