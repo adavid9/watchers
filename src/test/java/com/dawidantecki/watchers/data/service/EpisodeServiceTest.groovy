@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.data.service
 
 import com.dawidantecki.watchers.data.entity.Episode
+import com.dawidantecki.watchers.data.repository.EpisodeRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
@@ -10,6 +11,12 @@ class EpisodeServiceTest extends Specification {
 
     @Autowired
     EpisodeService episodeService
+    @Autowired
+    EpisodeRepository episodeRepository
+
+    def cleanup() {
+        episodeRepository.deleteAll()
+    }
 
     def "should add episode to the database"() {
         when:
