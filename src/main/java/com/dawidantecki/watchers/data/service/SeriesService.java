@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -30,6 +31,14 @@ public class SeriesService {
     public void addSeries(Series series) {
         if (series != null)
             seriesRepository.save(series);
+    }
+
+    public void addSeries(Collection<Series> series) {
+        if (series.size() > 0)
+            series.forEach(x -> {
+                if (x != null)
+                    addSeries(x);
+            });
     }
 
     public void deleteSeries(long id) {
