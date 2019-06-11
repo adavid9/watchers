@@ -1,13 +1,13 @@
 package com.dawidantecki.watchers.data.service
 
+import com.dawidantecki.watchers.configuration.DatabaseConnectionTest
 import com.dawidantecki.watchers.data.entity.Episode
 import com.dawidantecki.watchers.data.repository.EpisodeRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import spock.lang.Specification
 
 @SpringBootTest
-class EpisodeServiceTest extends Specification {
+class EpisodeServiceTest extends DatabaseConnectionTest {
 
     @Autowired
     private EpisodeService episodeService
