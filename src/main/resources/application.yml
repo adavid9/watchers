@@ -13,3 +13,10 @@ spring:
     username: watchers_admin
     password: watchers_admin
     driver-class-name: com.mysql.jdbc.Driver
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: DEBUG
+#      hibernate: DEBUG
