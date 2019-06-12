@@ -3,7 +3,6 @@ package com.dawidantecki.watchers.data.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,13 +14,13 @@ import org.springframework.stereotype.Service;
 public class SecurityService {
 
     private AuthenticationManager authenticationManager;
-    private UserDetailsService userDetailsService;
+    private UserDetailsService myUserDetailsService;
 
     @Autowired
     public SecurityService(AuthenticationManager authenticationManager,
-                           @Qualifier(value = "myUserDetailsService") UserDetailsService userDetailsService) {
+                           UserDetailsService myUserDetailsService) {
         this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
+        this.myUserDetailsService = myUserDetailsService;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
@@ -36,7 +35,7 @@ public class SecurityService {
     }
 
     public void autoLogin(String username, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails, password, userDetails.getAuthorities()
         );
