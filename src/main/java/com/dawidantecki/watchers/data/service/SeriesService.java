@@ -28,6 +28,10 @@ public class SeriesService {
         return seriesRepository.findAll();
     }
 
+    public Series findByTitle(String title) {
+        return seriesRepository.findByTitle(title);
+    }
+
     public void addSeries(Series series) {
         if (series != null)
             seriesRepository.save(series);
@@ -45,5 +49,12 @@ public class SeriesService {
         Series series = findById(id);
         if (series != null)
             seriesRepository.delete(series);
+    }
+
+    public void deleteSeries(String title) {
+        Series series = findByTitle(title);
+        if (series != null) {
+            seriesRepository.delete(series);
+        }
     }
 }

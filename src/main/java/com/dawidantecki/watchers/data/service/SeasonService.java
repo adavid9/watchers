@@ -28,6 +28,10 @@ public class SeasonService {
         return seasonRepository.findAll();
     }
 
+    public Season findByName(String name) {
+        return seasonRepository.findByName(name);
+    }
+
     public void addSeason(Season season) {
         if (season != null)
             seasonRepository.save(season);

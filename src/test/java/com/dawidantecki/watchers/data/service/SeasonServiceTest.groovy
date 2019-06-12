@@ -51,4 +51,13 @@ class SeasonServiceTest extends DatabaseConnectionTest {
         then:
         seasonService.findAll().size() == seasons.size()
     }
+
+    def "should find season by name"() {
+        when:
+        Season season = new Season("Season1", 10)
+        and:
+        seasonService.addSeason(season)
+        then:
+        seasonService.findByName(season.name)
+    }
 }

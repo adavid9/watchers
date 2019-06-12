@@ -51,4 +51,24 @@ class SeriesServiceTest extends DatabaseConnectionTest {
         then:
         seriesService.findAll().size() == series.size()
     }
+
+    def "should find series by title"() {
+        when:
+        Series series = new Series("series1", "xxx", "xxx", "xxx")
+        and:
+        seriesService.addSeries(series)
+        then:
+        seriesService.findByTitle(series.title)
+    }
+
+    def "should delete series by title"() {
+        given:
+        Series series = new Series("series1", "xxx", "xxx", "xxx")
+        when:
+        seriesService.addSeries(series)
+        and:
+        seriesService.deleteSeries(series.title)
+        then:
+        !seriesService.findByTitle(series.title)
+    }
 }
