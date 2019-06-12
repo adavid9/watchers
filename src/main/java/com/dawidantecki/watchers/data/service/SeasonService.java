@@ -51,6 +51,10 @@ public class SeasonService {
             seasonRepository.delete(season);
     }
 
+    public void deleteSeason(Season season) {
+        deleteSeasonById(season.getId());
+    }
+
     public void deleteSeasons(Collection<Season> seasons) {
         if (seasons.size() > 0)
             seasons.forEach(x -> {

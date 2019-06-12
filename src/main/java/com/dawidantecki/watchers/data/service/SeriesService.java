@@ -52,6 +52,10 @@ public class SeriesService {
         deleteOperation(series);
     }
 
+    public void deleteSeries(Series series) {
+        deleteOperation(series);
+    }
+
     public void deleteSeries(String title) {
         Series series = findByTitle(title);
         deleteOperation(series);
@@ -61,7 +65,7 @@ public class SeriesService {
         if (series == null)
             return;
 
-        series.getSeasons().forEach(x -> seasonService.deleteSeasonById(x.getId()));
+        series.getSeasons().forEach(x -> seasonService.deleteSeason(x));
         seriesRepository.delete(series);
     }
 }

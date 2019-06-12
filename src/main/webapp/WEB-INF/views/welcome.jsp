@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%--
   Created by IntelliJ IDEA.
   User: adavid
@@ -12,11 +13,21 @@
     <title>Watchers - Home</title>
 </head>
 <body>
-    <c:if test="${msg != null}">
-        <h1><c:out value="${msg}"></c:out></h1>
-        <c:if test="${description != null}">
-            <p><c:out value="${description}"></c:out></p>
-        </c:if>
+<div class="container">
+    <%--    <c:if test="${msg != null}">--%>
+    <%--        <h1><c:out value="${msg}"></c:out></h1>--%>
+    <%--        <c:if test="${description != null}">--%>
+    <%--            <p><c:out value="${description}"></c:out></p>--%>
+    <%--        </c:if>--%>
+    <%--    </c:if>--%>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+
+        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a
+                onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
     </c:if>
+</div>
 </body>
 </html>
