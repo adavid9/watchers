@@ -1,15 +1,11 @@
 package com.dawidantecki.watchers.data.entity;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@ToString
 @Entity
 @Table(name = "season")
 public class Season {
@@ -27,7 +23,8 @@ public class Season {
     @OneToMany(mappedBy = "season", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @EqualsAndHashCode.Exclude
     private List<Episode> episodes;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @CollectionTable(name = "series_id")
     private Series series;
 
     public Season() {
@@ -85,5 +82,14 @@ public class Season {
 
     public void setSeries(Series series) {
         this.series = series;
+    }
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "name='" + name + '\'' +
+                ", episodesNo=" + episodesNo +
+                ", release_date=" + release_date +
+                '}';
     }
 }

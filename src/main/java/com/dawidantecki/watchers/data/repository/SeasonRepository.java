@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Long> {
+    Season findByName(String name);
 }

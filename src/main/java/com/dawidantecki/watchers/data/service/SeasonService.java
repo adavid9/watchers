@@ -50,4 +50,12 @@ public class SeasonService {
         if (season != null)
             seasonRepository.delete(season);
     }
+
+    public void deleteSeasons(Collection<Season> seasons) {
+        if (seasons.size() > 0)
+            seasons.forEach(x -> {
+                if (x != null)
+                    deleteSeasonById(x.getId());
+            });
+    }
 }

@@ -1,16 +1,14 @@
 package com.dawidantecki.watchers.data.entity;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
-@Data
-@ToString
 @Entity
+@EqualsAndHashCode
 @Table(name = "series")
 public class Series {
 
@@ -28,9 +26,10 @@ public class Series {
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date release_date;
-    @OneToMany(mappedBy = "series", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "series_id")
     @EqualsAndHashCode.Exclude
-    private List<Season> seasons;
+    private List<Season> seasons = new LinkedList<>();
 
     public Series() {
 
@@ -99,3 +98,4 @@ public class Series {
         this.seasons = seasons;
     }
 }
+

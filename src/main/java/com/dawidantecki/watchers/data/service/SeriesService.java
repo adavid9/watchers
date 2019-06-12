@@ -14,10 +14,12 @@ import java.util.List;
 public class SeriesService {
 
     private SeriesRepository seriesRepository;
+    private SeasonService seasonService;
 
     @Autowired
-    public SeriesService(SeriesRepository seriesRepository) {
+    public SeriesService(SeriesRepository seriesRepository, SeasonService seasonService) {
         this.seriesRepository = seriesRepository;
+        this.seasonService = seasonService;
     }
 
     public Series findById(long id) {
@@ -47,14 +49,19 @@ public class SeriesService {
 
     public void deleteSeries(long id) {
         Series series = findById(id);
-        if (series != null)
-            seriesRepository.delete(series);
+        deleteOperation(series);
     }
 
     public void deleteSeries(String title) {
         Series series = findByTitle(title);
-        if (series != null) {
-            seriesRepository.delete(series);
-        }
+        deleteOperation(series);
+    }
+
+    private void deleteOperation(Series series) {
+        if (series == null)
+            return;
+
+        series.getSeasons().forEach(x -> seasonService.deleteSeasonById(x.getId()));
+        seriesRepository.delete(series);
     }
 }

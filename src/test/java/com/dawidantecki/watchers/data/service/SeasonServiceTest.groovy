@@ -60,4 +60,17 @@ class SeasonServiceTest extends DatabaseConnectionTest {
         then:
         seasonService.findByName(season.name)
     }
+
+    def "should delete a collection of seasons"() {
+        given:
+        List<Season> seasons = Arrays.asList(new Season("season1", 5), new Season("season2", 10))
+        when:
+        seasonService.addSeasons(seasons)
+        then:
+        seasonService.findAll().size() == seasons.size()
+        when:
+        seasonService.deleteSeasons(seasons)
+        then:
+        seasonService.findAll().size() == 0
+    }
 }
