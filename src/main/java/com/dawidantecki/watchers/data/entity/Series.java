@@ -30,7 +30,7 @@ public class Series {
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date release_date;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "series_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

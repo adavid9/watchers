@@ -29,7 +29,7 @@ public class Season {
     @EqualsAndHashCode.Exclude
     private List<Episode> episodes;
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @CollectionTable(name = "series_id")
     private Series series;
 

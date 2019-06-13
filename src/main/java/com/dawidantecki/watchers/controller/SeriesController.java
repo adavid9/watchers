@@ -1,7 +1,8 @@
 package com.dawidantecki.watchers.controller;
 
+import com.dawidantecki.watchers.data.entity.Episode;
+import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
-import com.dawidantecki.watchers.data.service.SeasonService;
 import com.dawidantecki.watchers.data.service.SeriesService;
 import com.dawidantecki.watchers.util.DateParser;
 import org.springframework.stereotype.Controller;
@@ -11,17 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
 public class SeriesController {
 
     private SeriesService seriesService;
-    private SeasonService seasonService;
 
-    public SeriesController(SeriesService seriesService, SeasonService seasonService) {
+    public SeriesController(SeriesService seriesService) {
         this.seriesService = seriesService;
-        this.seasonService = seasonService;
     }
 
     @RequestMapping(value = "/addSeries", method = RequestMethod.GET)
@@ -92,5 +92,38 @@ public class SeriesController {
         model.addAttribute("series", series);
 
         return "admin/series/delete";
+    }
+
+    @RequestMapping(value = "/readSeries", method = RequestMethod.GET)
+    public String read(Model model) {
+        model.addAttribute("series", seriesService.findAll());
+        return "admin/series/read";
+    }
+
+    @RequestMapping(value = "/readSeries/{id}", method = RequestMethod.POST)
+    public String read(@PathVariable("id") Long id, Model model) {
+        Series foundSeries = seriesService.findById(id);
+        if (foundSeries == null) {
+            model.addAttribute("msgError", "There is no series");
+        } else {
+            List<Season> seasons = foundSeries.getSeasons();
+            List<Episode> episodes = new LinkedList<>();
+            if (seasons != null && seasons.size() > 0) {
+                seasons.forEach(x -> episodes.addAll(x.getEpisodes()));
+            }
+            model.addAttribute("series", foundSeries);
+            model.addAttribute("seasons", seasons);
+            model.addAttribute("episodes", episodes);
+        }
+
+        return "admin/series/readOne";
+    }
+
+    // Not finished update
+    @RequestMapping(value = "/updateSeries", method = RequestMethod.GET)
+    public String update(Model model) {
+        model.addAttribute("series", seriesService.findAll());
+
+        return "admin/series/update";
     }
 }

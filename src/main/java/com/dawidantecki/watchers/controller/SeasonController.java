@@ -1,5 +1,6 @@
 package com.dawidantecki.watchers.controller;
 
+import com.dawidantecki.watchers.data.entity.Episode;
 import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
 import com.dawidantecki.watchers.data.service.SeasonService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -110,5 +112,30 @@ public class SeasonController {
 
         model.addAttribute("seasons", seasonService.findAll());
         return "admin/season/delete";
+    }
+
+    @RequestMapping(value = "/readSeason", method = RequestMethod.GET)
+    public String read(Model model) {
+        model.addAttribute("seasons", seasonService.findAll());
+
+        return "admin/season/read";
+    }
+
+    @RequestMapping(value = "/readSeason/{id}", method = RequestMethod.POST)
+    public String read(@PathVariable("id") Long id, Model model) {
+        Season foundSeason = seasonService.findById(id);
+        if (foundSeason == null) {
+            model.addAttribute("msgError", "Season not found");
+        } else {
+            List<Episode> episodes = new LinkedList<>();
+            Series series = foundSeason.getSeries();
+            foundSeason.getEpisodes().forEach(episodes::add);
+
+            model.addAttribute("series", series);
+            model.addAttribute("season", foundSeason);
+            model.addAttribute("episodes", episodes);
+
+        }
+        return "admin/season/readOne";
     }
 }

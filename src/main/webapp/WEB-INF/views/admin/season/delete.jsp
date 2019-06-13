@@ -45,7 +45,9 @@
                 <tr>
                     <c:out value="Season release: ${season.release_date}" /><br>
                 </tr>
-                <button type="submit">Delete</button>
+                <form method="POST" action="${contextPath}/deleteSeason/${season.id}">
+                    <button type="submit">Delete</button>
+                </form>
             </table>
         </c:forEach>
     </div>
