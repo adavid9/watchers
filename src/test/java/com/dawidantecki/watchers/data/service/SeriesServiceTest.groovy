@@ -1,6 +1,8 @@
 package com.dawidantecki.watchers.data.service
 
 import com.dawidantecki.watchers.configuration.DatabaseConnectionTest
+import com.dawidantecki.watchers.data.entity.Episode
+import com.dawidantecki.watchers.data.entity.Season
 import com.dawidantecki.watchers.data.entity.Series
 import com.dawidantecki.watchers.data.repository.SeriesRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,6 +15,10 @@ class SeriesServiceTest extends DatabaseConnectionTest {
     private SeriesService seriesService
     @Autowired
     private SeriesRepository seriesRepository
+    @Autowired
+    private SeasonService seasonService
+    @Autowired
+    private EpisodeService episodeService
 
     def cleanup() {
         seriesRepository.deleteAll()
@@ -70,5 +76,29 @@ class SeriesServiceTest extends DatabaseConnectionTest {
         seriesService.deleteSeries(series.title)
         then:
         !seriesService.findByTitle(series.title)
+    }
+
+    def "should delete seasons and episodes if a series is deleted"() {
+        given:
+        Series series = new Series("title", "", "", "")
+        Season season = new Season("season", 5)
+        Episode episode = new Episode("episode", "")
+        when:
+        season.setSeries(series)
+        episode.setSeason(season)
+        and:
+        seriesService.addSeries(series)
+        seasonService.addSeason(season)
+        episodeService.addEpisode(episode)
+        then:
+        seriesService.findByTitle(series.title)
+        seasonService.findByName(season.name)
+        episodeService.findByTitle(episode.title)
+        when:
+        seriesService.deleteSeries(series.title)
+        then:
+        !seriesService.findByTitle(series.title)
+        !seasonService.findByName(season.name)
+        !episodeService.findByTitle(episode.title)
     }
 }
