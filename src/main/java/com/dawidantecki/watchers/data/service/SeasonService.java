@@ -14,10 +14,12 @@ import java.util.List;
 public class SeasonService {
 
     private SeasonRepository seasonRepository;
+    private EpisodeService episodeService;
 
     @Autowired
-    public SeasonService(SeasonRepository seasonRepository) {
+    public SeasonService(SeasonRepository seasonRepository, EpisodeService episodeService) {
         this.seasonRepository = seasonRepository;
+        this.episodeService = episodeService;
     }
 
     public Season findById(long id) {
@@ -47,8 +49,7 @@ public class SeasonService {
 
     public void deleteSeasonById(long id) {
         Season season = findById(id);
-        if (season != null)
-            seasonRepository.delete(season);
+        deleteOperation(season);
     }
 
     public void deleteSeason(Season season) {
@@ -59,7 +60,15 @@ public class SeasonService {
         if (seasons.size() > 0)
             seasons.forEach(x -> {
                 if (x != null)
-                    deleteSeasonById(x.getId());
+                    deleteOperation(x);
             });
+    }
+
+    public void deleteOperation(Season season) {
+        if (season == null)
+            return;
+
+        season.getEpisodes().forEach(x -> {episodeService.deleteEpisodeById(x.getId());});
+        seasonRepository.delete(season);
     }
 }

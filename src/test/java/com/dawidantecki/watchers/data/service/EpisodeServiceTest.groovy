@@ -51,4 +51,13 @@ class EpisodeServiceTest extends DatabaseConnectionTest {
         then:
         episodeService.findAll().size() == episodes.size()
     }
+
+    def "should find episode by title if exists"() {
+        given:
+        Episode episode = new Episode("Episode", "xxx")
+        when:
+        episodeService.addEpisode(episode)
+        then:
+        episodeService.findByTitle(episode.title)
+    }
 }

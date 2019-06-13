@@ -22,7 +22,7 @@ public class Episode {
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date release_date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Season season;
 
@@ -33,5 +33,12 @@ public class Episode {
     public Episode(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public Episode(String title, String description, Date release_date, Season season) {
+        this.title = title;
+        this.description = description;
+        this.release_date = release_date;
+        this.season = season;
     }
 }

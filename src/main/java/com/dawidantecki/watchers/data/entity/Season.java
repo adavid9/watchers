@@ -25,8 +25,9 @@ public class Season {
     @Temporal(TemporalType.DATE)
     private Date release_date;
     @ToString.Exclude
-    @OneToMany(mappedBy = "season", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "season_id")
     private List<Episode> episodes;
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)

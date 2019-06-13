@@ -28,6 +28,10 @@ public class EpisodeService {
         return episodeRepository.findAll();
     }
 
+    public Episode findByTitle(String title) {
+        return episodeRepository.findByTitle(title);
+    }
+
     public void addEpisode(Episode episode) {
         if (episode != null)
             episodeRepository.save(episode);
