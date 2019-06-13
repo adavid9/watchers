@@ -55,6 +55,11 @@
                     Add Episode
                 </a>
             </button>
+            <button type="button">
+                <a href="${contextPath}/addMovie">
+                    Add Movie
+                </a>
+            </button>
         </div>
     </c:if>
 </div>
