@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class EpisodesController {
@@ -127,5 +128,44 @@ public class EpisodesController {
         }
 
         return "admin/episodes/readOne";
+    }
+
+    @RequestMapping(value = "/updateEpisode", method = RequestMethod.GET)
+    public String update(Model model) {
+        List<Episode> episodes = episodeService.findAll();
+        model.addAttribute("episodes", episodes);
+
+        return "admin/episodes/update";
+    }
+
+    @RequestMapping(value = "/updateEpisode/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable("id") Long id, Model model) {
+        Episode episode = episodeService.findById(id);
+        if (episode == null) {
+            model.addAttribute("msgError", "Episode not found");
+        }
+
+        model.addAttribute("episode", episode);
+        return "admin/episodes/updateEpisode";
+    }
+
+    @RequestMapping(value = "/updateEpisode", method = RequestMethod.POST)
+    public String update(@RequestParam("id") String id, @RequestParam("title") String title,
+                         @RequestParam("description") String description, @RequestParam("release_date") String release_date,
+                         Model model) {
+        Episode episode = episodeService.findById(Long.parseLong(id));
+        if (episode == null) {
+            model.addAttribute("msgError", "Episode not found");
+            return "admin/episodes/update";
+        }
+
+        episode.setTitle(title);
+        episode.setDescription(description);
+        episode.setRelease_date(DateParser.parseDate(release_date));
+        episodeService.addEpisode(episode);
+
+        model.addAttribute("episode", episode);
+
+        return "admin/episodes/updateEpisode";
     }
 }

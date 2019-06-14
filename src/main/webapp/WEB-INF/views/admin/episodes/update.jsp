@@ -3,30 +3,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: adavid
-  Date: 2019-06-13
-  Time: 11:38
+  Date: 2019-06-14
+  Time: 17:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Watchers - Update Series</title>
+    <title>Watchers - Update Episodes</title>
 </head>
 <body>
 <div class="container">
     <h1>Update Series</h1>
     <br>
-    <c:forEach items="${series}" var="series">
+    <c:forEach items="${episodes}" var="episode">
         <table border="0" width="20%">
-            <tr><c:out value="Series id: ${series.id}"></c:out><br></tr>
-            <tr><c:out value="Series title: ${series.title}"></c:out><br></tr>
-            <tr><c:out value="Series description: ${series.description}"></c:out><br></tr>
-            <tr><c:out value="Series country: ${series.country}"></c:out><br></tr>
-            <tr><c:out value="Series director: ${series.director}"></c:out><br></tr>
-            <tr><c:out value="Series release: ${series.release_date}"></c:out><br></tr>
+            <tr><c:out value="Episode id: ${episode.id}"></c:out><br></tr>
+            <tr><c:out value="Episode title: ${episode.title}"></c:out><br></tr>
+            <tr><c:out value="Episode description: ${episode.description}"></c:out><br></tr>
+            <tr><c:out value="Episode release: ${episode.release_date}"></c:out><br></tr>
         </table>
-        <form action="${contextPath}/updateSeries/${series.id}" method="POST">
-            <button type="submit">Update Series</button>
+        <form action="${contextPath}/updateEpisode/${episode.id}" method="POST">
+            <button type="submit">Update Episode</button>
         </form>
     </c:forEach>
     <c:if test="${msgError != null}">

@@ -19,7 +19,6 @@
         <table border="0" width="20%">
             <tr><c:out value="id: ${season.id}"></c:out><br></tr>
             <tr><c:out value="name: ${season.name}"></c:out><br></tr>
-            <tr><c:out value="episode number: ${season.episodesNo}"></c:out><br></tr>
             <tr><c:out value="release: ${season.release_date}"></c:out><br></tr>
         </table>
         <form action="${contextPath}/readSeason/${season.id}" method="POST">

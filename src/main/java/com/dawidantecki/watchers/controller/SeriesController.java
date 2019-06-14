@@ -119,11 +119,46 @@ public class SeriesController {
         return "admin/series/readOne";
     }
 
-    // Not finished update
     @RequestMapping(value = "/updateSeries", method = RequestMethod.GET)
     public String update(Model model) {
-        model.addAttribute("series", seriesService.findAll());
+        List<Series> series = seriesService.findAll();
+        model.addAttribute("series", series);
 
         return "admin/series/update";
     }
+
+    @RequestMapping(value = "/updateSeries/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable("id") Long id, Model model) {
+        Series series = seriesService.findById(id);
+        if (series == null) {
+            model.addAttribute("msgError", "No series found");
+        }
+
+        model.addAttribute("series", series);
+        return "admin/series/updateSeries";
+    }
+
+    @RequestMapping(value = "/updateSeries", method = RequestMethod.POST)
+    public String update(@RequestParam("id") String id, @RequestParam("title") String title,
+                         @RequestParam("description") String description, @RequestParam("country") String country,
+                         @RequestParam("director") String director, @RequestParam("release_date") String release_date,
+                         Model model) {
+        Series series = seriesService.findById(Long.parseLong(id));
+        if (series == null) {
+            model.addAttribute("msgError", "Series not found");
+            return "admin/series/update";
+        }
+
+        series.setTitle(title);
+        series.setDescription(description);
+        series.setCountry(country);
+        series.setDirector(director);
+        series.setRelease_date(DateParser.parseDate(release_date));
+
+        seriesService.addSeries(series);
+        model.addAttribute("msgSuccess", "Successfully updated");
+
+        return "admin/series/updateSeries";
+    }
+
 }

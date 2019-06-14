@@ -81,7 +81,7 @@ class SeriesServiceTest extends DatabaseConnectionTest {
     def "should delete seasons and episodes if a series is deleted"() {
         given:
         Series series = new Series("title", "", "", "")
-        Season season = new Season("season", 5)
+        Season season = new Season("season")
         Episode episode = new Episode("episode", "")
         when:
         season.setSeries(series)

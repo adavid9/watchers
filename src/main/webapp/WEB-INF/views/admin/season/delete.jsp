@@ -40,9 +40,6 @@
                     <c:out value="Season name: ${season.name}" /><br>
                 </tr>
                 <tr>
-                    <c:out value="Season espisodes: ${season.episodesNo}" /><br>
-                </tr>
-                <tr>
                     <c:out value="Season release: ${season.release_date}" /><br>
                 </tr>
                 <form method="POST" action="${contextPath}/deleteSeason/${season.id}">

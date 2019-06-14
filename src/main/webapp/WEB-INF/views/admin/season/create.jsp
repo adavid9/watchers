@@ -19,9 +19,6 @@
         <p>Name:<br>
             <input type="text" name="name"/>
         </p>
-        <p>Episodes number:<br>
-            <input type="text" name="episodes_no"/>
-        </p>
         <p>Release:<br>
             <input type="date" name="release_date"/>
         </p>

@@ -21,7 +21,6 @@
         <tr><b>Season</b><br></tr>
         <tr><c:out value="id: ${season.id}"></c:out><br></tr>
         <tr><c:out value="name: ${season.name}"></c:out><br></tr>
-        <tr><c:out value="episode number: ${season.episodesNo}"></c:out><br></tr>
         <tr><c:out value="release: ${season.release_date}"></c:out><br></tr>
         <tr><b>Episodes</b><br></tr>
         <c:forEach items="${episodes}" var="episode">

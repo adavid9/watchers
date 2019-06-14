@@ -23,7 +23,7 @@ class SeasonServiceTest extends DatabaseConnectionTest {
 
     def "should add season to the database"() {
         when:
-        Season season = new Season("Season 1", 10)
+        Season season = new Season("Season 1")
         and:
         seasonService.addSeason(season)
         then:
@@ -32,7 +32,7 @@ class SeasonServiceTest extends DatabaseConnectionTest {
 
     def "should remove season from the database when added previously to the database"() {
         when:
-        Season season = new Season("Season 1", 10)
+        Season season = new Season("Season 1")
         and:
         seasonService.addSeason(season)
         then:
@@ -47,8 +47,8 @@ class SeasonServiceTest extends DatabaseConnectionTest {
         given:
         List<Season> seasons = []
         when:
-        seasons.add(new Season("Season 1", 10))
-        seasons.add(new Season("Season 2", 8))
+        seasons.add(new Season("Season 1"))
+        seasons.add(new Season("Season 2"))
         and:
         seasonService.addSeasons(seasons)
         then:
@@ -57,7 +57,7 @@ class SeasonServiceTest extends DatabaseConnectionTest {
 
     def "should find season by name"() {
         when:
-        Season season = new Season("Season1", 10)
+        Season season = new Season("Season1")
         and:
         seasonService.addSeason(season)
         then:
@@ -66,7 +66,7 @@ class SeasonServiceTest extends DatabaseConnectionTest {
 
     def "should delete a collection of seasons"() {
         given:
-        List<Season> seasons = Arrays.asList(new Season("season1", 5), new Season("season2", 10))
+        List<Season> seasons = Arrays.asList(new Season("season1"), new Season("season2"))
         when:
         seasonService.addSeasons(seasons)
         then:
@@ -80,7 +80,7 @@ class SeasonServiceTest extends DatabaseConnectionTest {
     def "should delete episodes if a season is deleted"() {
         given:
         List<Episode> episodes = []
-        Season season = new Season("season", 2)
+        Season season = new Season("season")
         when:
         episodes.add(new Episode("title", ""))
         episodes.add(new Episode("title2", ""))

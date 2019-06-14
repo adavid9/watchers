@@ -24,7 +24,6 @@
             <c:forEach items="${seasons}" var="season">
                 <c:if test="${season.series.id == series.id}">
                     <tr><c:out value="Season name: ${season.name}"></c:out><br></tr>
-                    <tr><c:out value="Season episodes number: ${season.episodesNo}"></c:out><br></tr>
                     <tr><c:out value="Season relase: ${season.release_date}"></c:out><br></tr>
                 </c:if>
                 <c:forEach items="${episodes}" var="episode">

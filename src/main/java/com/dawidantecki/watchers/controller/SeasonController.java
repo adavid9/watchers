@@ -33,9 +33,8 @@ public class SeasonController {
     }
 
     @RequestMapping(value = "/addSeason", method = RequestMethod.POST)
-    public String create(@RequestParam("name") String name, @RequestParam("episodes_no") String episodeNo,
-                         @RequestParam("release_date") String release_date, @RequestParam("seriesTitle") String seriesTitle,
-                         Model model) {
+    public String create(@RequestParam("name") String name, @RequestParam("release_date") String release_date,
+                         @RequestParam("seriesTitle") String seriesTitle, Model model) {
 
         Season foundSeason = seasonService.findByName(name);
         if (foundSeason != null) {
@@ -48,12 +47,7 @@ public class SeasonController {
             return "admin/season/create";
         }
 
-        if (episodeNo == null || episodeNo.trim().length() == 0) {
-            model.addAttribute("msgError", "Incorrect episodes num");
-            return "admin/season/create";
-        }
-        Integer episodes = Integer.parseInt(episodeNo);
-        Season season = new Season(name, episodes);
+        Season season = new Season(name);
 
         if (release_date != null) {
             season.setRelease_date(DateParser.parseDate(release_date));
@@ -137,5 +131,42 @@ public class SeasonController {
 
         }
         return "admin/season/readOne";
+    }
+
+    @RequestMapping(value = "/updateSeason", method = RequestMethod.GET)
+    public String update(Model model) {
+        List<Season> seasons = seasonService.findAll();
+        model.addAttribute("seasons", seasons);
+
+        return "admin/season/update";
+    }
+
+    @RequestMapping(value = "/updateSeason/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable("id") Long id, Model model) {
+        Season season = seasonService.findById(id);
+        if (season == null) {
+            model.addAttribute("msgError", "Season not found");
+            return "admin/season/update";
+        }
+
+        model.addAttribute("season", season);
+        return "admin/season/updateSeason";
+    }
+
+    @RequestMapping(value = "/updateSeason", method = RequestMethod.POST)
+    public String update(@RequestParam("id") String id, @RequestParam("name") String name,
+                         @RequestParam("release_date") String release_date, Model model) {
+        Season season = seasonService.findById(Long.parseLong(id));
+        if (season == null) {
+            model.addAttribute("msgError", "Season not found");
+            return "admin/season/update";
+        }
+
+        season.setName(name);
+        season.setRelease_date(DateParser.parseDate(release_date));
+        seasonService.addSeason(season);
+
+        model.addAttribute("msgSuccess", "Successfully updated");
+        return "admin/season/updateSeason";
     }
 }

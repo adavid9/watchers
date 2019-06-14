@@ -19,8 +19,6 @@ public class Season {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "episodes_no")
-    private Integer episodesNo;
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     private Date release_date;
@@ -38,9 +36,8 @@ public class Season {
 
     }
 
-    public Season(String name, Integer episodesNo) {
+    public Season(String name) {
         this.name = name;
-        this.episodesNo = episodesNo;
     }
 
 }
