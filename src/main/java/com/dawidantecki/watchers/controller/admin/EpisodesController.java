@@ -1,4 +1,4 @@
-package com.dawidantecki.watchers.controller;
+package com.dawidantecki.watchers.controller.admin;
 
 import com.dawidantecki.watchers.data.entity.Episode;
 import com.dawidantecki.watchers.data.entity.Season;
