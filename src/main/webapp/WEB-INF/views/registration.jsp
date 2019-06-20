@@ -25,6 +25,7 @@
             <p>Confirm Password:</br>
                 <input type="password" name="confirmPassword" />
             </p>
+            <input type="hidden" name="roleName" value="ROLE_USER" />
             <input type="submit" value="Submit" />
         </form>
         <c:if test="${msgError != null}">

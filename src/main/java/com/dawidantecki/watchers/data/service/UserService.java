@@ -1,7 +1,6 @@
 package com.dawidantecki.watchers.data.service;
 
 import com.dawidantecki.watchers.data.entity.User;
-import com.dawidantecki.watchers.data.repository.RoleRepository;
 import com.dawidantecki.watchers.data.repository.UserRepository;
 import com.dawidantecki.watchers.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -18,13 +16,11 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -47,7 +43,6 @@ public class UserService {
         if (actualUser != null)
             throw new UserAlreadyExistsException("User with " + user.getUsername() + " already exists.");
 
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

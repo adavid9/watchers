@@ -1,6 +1,8 @@
 package com.dawidantecki.watchers.controller;
 
+import com.dawidantecki.watchers.data.entity.Role;
 import com.dawidantecki.watchers.data.entity.User;
+import com.dawidantecki.watchers.data.service.RoleService;
 import com.dawidantecki.watchers.data.service.SecurityService;
 import com.dawidantecki.watchers.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// TODO: Improve the UserController ( this is just the first attempt to the registration and login system )
+import java.util.HashSet;
+import java.util.List;
+
 @Controller
 public class UserController {
 
     private UserService userService;
     private SecurityService securityService;
+    private RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService, SecurityService securityService) {
+    public UserController(UserService userService, SecurityService securityService, RoleService roleService) {
         this.userService = userService;
         this.securityService = securityService;
+        this.roleService = roleService;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -29,9 +35,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@RequestParam("username") String username, @RequestParam("password")
-                               String password, @RequestParam("confirmPassword") String confirmPassword,
-                               Model model) {
+    public String registration(@RequestParam("username") String username, @RequestParam("password") String password,
+                               @RequestParam("confirmPassword") String confirmPassword,
+                               @RequestParam("roleName") String roleName, Model model) {
 
         User foundUser = userService.findByUsername(username);
         if (foundUser != null) {
@@ -49,7 +55,19 @@ public class UserController {
             return "registration";
         }
 
+        Role role = null;
+        if (roleName != null) {
+            role = roleService.findByName(roleName);
+        }
+
+        if (role == null) {
+            role = new Role(roleName);
+        }
+
+        roleService.addRole(role);
+
         User user = new User(username, password, confirmPassword);
+        user.setRoles(new HashSet<>(List.of(role)));
 
         userService.addUser(user);
         securityService.autoLogin(username, password);
