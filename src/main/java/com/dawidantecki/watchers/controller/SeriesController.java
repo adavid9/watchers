@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class SeriesController {
 
     private SeriesService seriesService;

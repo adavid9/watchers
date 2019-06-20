@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="${contextPath}/deleteSeason" method="POST">
+        <form action="${contextPath}/admin/deleteSeason" method="POST">
             <h1>Delete season:</h1>
             <p>Name:<br>
                 <input type="text" name="name" />
@@ -42,7 +42,7 @@
                 <tr>
                     <c:out value="Season release: ${season.release_date}" /><br>
                 </tr>
-                <form method="POST" action="${contextPath}/deleteSeason/${season.id}">
+                <form method="POST" action="${contextPath}/admin/deleteSeason/${season.id}">
                     <button type="submit">Delete</button>
                 </form>
             </table>

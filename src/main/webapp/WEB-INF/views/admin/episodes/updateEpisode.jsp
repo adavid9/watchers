@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="POST" action="${contextPath}/updateEpisode">
+    <form method="POST" action="${contextPath}/admin/updateEpisode">
         <table border="0" width="20%">
             <input type="hidden" name="id" value="<c:out value="${episode.id}"/>"/>
             <tr>Title:<br></tr>

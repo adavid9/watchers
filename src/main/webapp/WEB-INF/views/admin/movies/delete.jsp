@@ -15,7 +15,7 @@
 <body>
 <h1>Delete Movie:</h1>
 <h5>Delete by title:</h5>
-<form method="POST" action="${contextPath}/deleteMovie">
+<form method="POST" action="${contextPath}/admin/deleteMovie">
     <input type="text" name="title"/>
     <button type="submit">Delete</button>
 </form>
@@ -28,7 +28,7 @@
         <tr><c:out value="Country: ${movie.country}"/><br></tr>
         <tr><c:out value="Category: ${movie.category}"/><br></tr>
     </table>
-    <form method="POST" action="${contextPath}/deleteMovie/${movie.id}">
+    <form method="POST" action="${contextPath}/admin/deleteMovie/${movie.id}">
         <button type="submit">Delete</button>
     </form>
 </c:forEach>

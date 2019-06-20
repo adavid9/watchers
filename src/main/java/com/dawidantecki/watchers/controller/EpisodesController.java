@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class EpisodesController {
 
     private EpisodeService episodeService;

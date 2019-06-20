@@ -25,7 +25,9 @@
             <p>Confirm Password:</br>
                 <input type="password" name="confirmPassword" />
             </p>
-            <input type="hidden" name="roleName" value="ROLE_USER" />
+            <p>User Role:</br>
+                <input type="checkbox" name="roleName" value="ROLE_USER" checked="checked" />
+            </p>
             <input type="submit" value="Submit" />
         </form>
         <c:if test="${msgError != null}">

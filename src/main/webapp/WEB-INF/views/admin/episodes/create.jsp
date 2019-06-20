@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <form method="POST" action="${contextPath}/addEpisode">
+        <form method="POST" action="${contextPath}/admin/addEpisode">
             <h1>Add Episode:</h1>
             <p>Title:<br>
                 <input type="text" name="title"/>

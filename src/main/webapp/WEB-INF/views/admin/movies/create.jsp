@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <h1>Add movie:</h1>
-    <form action="${contextPath}/addMovie" method="POST">
+    <form action="${contextPath}/admin/addMovie" method="POST">
         <table border="0" width="20%">
             <tr>Title:</tr>
             <br>

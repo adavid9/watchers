@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="POST" action="${contextPath}/deleteSeries">
+    <form method="POST" action="${contextPath}/admin/deleteSeries">
         <p>Title:<br>
             <input type="text" name="title"/>
         </p>
@@ -57,7 +57,7 @@
                     <c:out value="Season release: ${seasons.release_date}" /><br>
                 </tr>
             </c:forEach>
-            <form action="${contextPath}/deleteSeries/${s.id}" method="POST">
+            <form action="${contextPath}/admin/deleteSeries/${s.id}" method="POST">
                 <button type="submit">Delete</button>
             </form>
             <c:if test="${msg} != null">

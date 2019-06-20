@@ -25,7 +25,7 @@
             <tr><c:out value="Series director: ${series.director}"></c:out><br></tr>
             <tr><c:out value="Series release: ${series.release_date}"></c:out><br></tr>
         </table>
-        <form action="${contextPath}/updateSeries/${series.id}" method="POST">
+        <form action="${contextPath}/admin/updateSeries/${series.id}" method="POST">
             <button type="submit">Update Series</button>
         </form>
     </c:forEach>

@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <form method="POST" action="${contextPath}/deleteEpisode">
+        <form method="POST" action="${contextPath}/admin/deleteEpisode">
             <h1>Delete episode by title:</h1>
             <input type="text" name="title" />
             <button type="submit">Delete</button>
@@ -27,7 +27,7 @@
                 <tr><c:out value="Episode title: ${episode.title}"></c:out><br></tr>
                 <tr><c:out value="Episode description: ${episode.description}"></c:out><br></tr>
                 <tr><c:out value="Episode release: ${episode.release_date}"></c:out><br></tr>
-                <form method="POST" action="${contextPath}/deleteEpisode/${episode.id}">
+                <form method="POST" action="${contextPath}/admin/deleteEpisode/${episode.id}">
                     <button type="submit">Delete</button>
                 </form>
             </table>

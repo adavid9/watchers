@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="POST" action="${contextPath}/updateMovie">
+    <form method="POST" action="${contextPath}/admin/updateMovie">
         <table border="0" width="20%">
             <input type="hidden" name="id" value="<c:out value="${movie.id}"/>"/>
             <tr>Title:<br></tr>

@@ -23,7 +23,7 @@
                 <tr><c:out value="Series director: ${series.director}"></c:out><br></tr>
                 <tr><c:out value="Series release: ${series.release_date}"></c:out><br></tr>
             </table>
-            <form action="${contextPath}/readSeries/${series.id}" method="POST">
+            <form action="${contextPath}/admin/readSeries/${series.id}" method="POST">
                 <button type="submit">More info</button>
             </form>
         </c:forEach>

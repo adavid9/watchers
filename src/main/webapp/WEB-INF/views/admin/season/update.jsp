@@ -22,7 +22,7 @@
             <tr><c:out value="Season title: ${season.name}"></c:out><br></tr>
             <tr><c:out value="Season release: ${season.release_date}"></c:out><br></tr>
         </table>
-        <form action="${contextPath}/updateSeason/${season.id}" method="POST">
+        <form action="${contextPath}/admin/updateSeason/${season.id}" method="POST">
             <button type="submit">Update Season</button>
         </form>
     </c:forEach>

@@ -23,7 +23,7 @@
             <tr><c:out value="Episode description: ${episode.description}"></c:out><br></tr>
             <tr><c:out value="Episode release: ${episode.release_date}"></c:out><br></tr>
         </table>
-        <form action="${contextPath}/updateEpisode/${episode.id}" method="POST">
+        <form action="${contextPath}/admin/updateEpisode/${episode.id}" method="POST">
             <button type="submit">Update Episode</button>
         </form>
     </c:forEach>

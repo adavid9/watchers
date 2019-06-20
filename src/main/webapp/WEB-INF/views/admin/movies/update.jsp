@@ -23,7 +23,7 @@
             <tr><c:out value="Movie country: ${movie.country}"></c:out><br></tr>
             <tr><c:out value="Movie category: ${movie.category}"></c:out><br></tr>
         </table>
-        <form action="${contextPath}/updateMovie/${movie.id}" method="POST">
+        <form action="${contextPath}/admin/updateMovie/${movie.id}" method="POST">
             <button type="submit">Update</button>
         </form>
     </c:forEach>

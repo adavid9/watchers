@@ -21,7 +21,7 @@
             <tr><c:out value="title: ${episode.title}"></c:out><br></tr>
             <tr><c:out value="description: ${episode.description}"></c:out><br></tr>
             <tr><c:out value="release: ${episode.release_date}"></c:out><br></tr>
-            <form method="POST" action="${contextPath}/readEpisode/${episode.id}">
+            <form method="POST" action="${contextPath}/admin/readEpisode/${episode.id}">
                 <button type="submit">More Info</button>
             </form>
         </table>
