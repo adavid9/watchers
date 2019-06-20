@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.data.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<User> users;
 
     public Role() {

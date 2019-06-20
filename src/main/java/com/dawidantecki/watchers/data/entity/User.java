@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.data.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class User {
     private String confirmPassword;
     @ManyToMany
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Role> roles;
 
     public User() {
