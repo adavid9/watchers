@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
-import java.util.List;
-
 @Controller
 public class UserController {
 
@@ -64,10 +61,8 @@ public class UserController {
             role = new Role(roleName);
         }
 
-        roleService.addRole(role);
-
         User user = new User(username, password, confirmPassword);
-        user.setRoles(new HashSet<>(List.of(role)));
+        user.getRoles().add(role);
 
         userService.addUser(user);
         securityService.autoLogin(username, password);
