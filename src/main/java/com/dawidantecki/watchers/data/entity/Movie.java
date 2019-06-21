@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @ToString
@@ -28,6 +30,12 @@ public class Movie {
     private String country;
     @Column(name = "category")
     private String category;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "users_movies", joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<User> users = new HashSet<>();
 
     public Movie() {
 

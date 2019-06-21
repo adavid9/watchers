@@ -30,6 +30,11 @@ public class User {
     @EqualsAndHashCode.Exclude
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToMany(mappedBy = "users")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Movie> user_movies = new HashSet<>();
+
     public User() {
 
     }
