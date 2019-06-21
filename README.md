@@ -5,13 +5,6 @@ Watchers is a website about movies and tv shows, user can register and login in 
 - Administrator is able to add movie, tv show with seasons and episodes.
 - User is only available to see the existing movies/tv shows and add them to his list.
 
-# Not finished - There left a lot things to do!
-
- - Not finished registration/login system
- - No ranking functionality
- - No pages for actions
-
-
 # How to run?
 > If you are using docker, you can just simply go to the root directory of the project
 > and run the following command `docker-compose up` there is prepared a docker-compose file
@@ -28,12 +21,12 @@ Watchers is a website about movies and tv shows, user can register and login in 
 ### Technologies used in the project.
 I decided to use the following technologies in the project.
 
-* JAVA
-* SPRING
-* HIBERNATE
-* MYSQL
-* JSP
-* JPA
-* DOCKER
-* GROOVY
-* SPOCK
+* Java
+* Spring
+* Spock
+* Docker
+
+### Available actions:
+Admin is available to add movies, series, seasons and episodes. User can see added entities by admin and add i.e. movies
+to his own list. Every user has his own movie or series list. In future is planned to add top 10 movies and functionality to 
+give starts for movies or series. It would be also great to add a posibility to upload an image to a movie or series.
