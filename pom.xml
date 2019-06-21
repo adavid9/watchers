@@ -10,10 +10,12 @@
     </parent>
     <groupId>com.dawidantecki</groupId>
     <artifactId>watchers</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>war</packaging>
     <name>watchers</name>
-    <description>none</description>
+    <description>This is a project that allows users to add his favorite movies to his list, and follow that what
+        they've already watched.
+    </description>
 
     <properties>
         <java.version>12</java.version>
