@@ -3,6 +3,7 @@ package com.dawidantecki.watchers.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,6 +21,7 @@ import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    @Lazy
     private UserDetailsService myUserDetailsService;
 
     @Override
