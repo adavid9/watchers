@@ -74,4 +74,8 @@ public class UserService {
 
         deleteUser(user.getId());
     }
+
+    public void deleteUser(User user) {
+        deleteUser(user.getId());
+    }
 }
