@@ -40,9 +40,13 @@ public class UserService {
         if (user == null)
             return;
         User actualUser = userRepository.findByUsername(user.getUsername());
+        // if the actual user id is different then user id that means the user already exists and cannot be saved 2nd time.
+        if (actualUser != null && !actualUser.getId().equals(user.getId())) {
+            throw new UserAlreadyExistsException("User with " + user.getUsername() + " username already exists");
+        }
+        // allow to edit existing user if the id is the same ( that means that this is the same user and this will be update )
         if (actualUser != null)
-            throw new UserAlreadyExistsException("User with " + user.getUsername() + " already exists.");
-
+            user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
