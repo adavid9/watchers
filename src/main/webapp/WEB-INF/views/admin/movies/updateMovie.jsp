@@ -30,6 +30,8 @@
             <tr><input type="text" name="country" value="<c:out value="${movie.country}"/>"/><br></tr>
             <tr>Category:<br></tr>
             <tr><input type="text" name="category" value="<c:out value="${movie.category}"/>"/></tr>
+            <tr>Rate:<br></tr>
+            <tr><input type="number" step="any" name="rate" value="<c:out value="${movie.rate}"/>"/></tr>
             <br>
         </table>
         <button type="submit">Update</button>

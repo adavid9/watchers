@@ -30,6 +30,8 @@ public class Movie {
     private String country;
     @Column(name = "category")
     private String category;
+    @Column(name = "rate")
+    private double rate;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_movies", joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
@@ -45,11 +47,12 @@ public class Movie {
         this.title = title;
     }
 
-    public Movie(String title, String description, Date release_date, String country, String category) {
+    public Movie(String title, String description, Date release_date, String country, String category, double rate) {
         this.title = title;
         this.description = description;
         this.release_date = release_date;
         this.country = country;
         this.category = category;
+        this.rate = rate;
     }
 }

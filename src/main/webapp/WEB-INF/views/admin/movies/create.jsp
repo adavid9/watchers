@@ -36,6 +36,10 @@
             <br>
             <tr><input type="text" name="category"/></tr>
             <br>
+            <tr>Rate:</tr>
+            <br>
+            <tr><input type="number" step="any" name="rate"/></tr>
+            <br>
             <tr>
                 <button type="submit">Submit</button>
             </tr>

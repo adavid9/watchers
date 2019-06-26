@@ -20,6 +20,7 @@
         <tr><c:out value="Release: ${movie.release_date}"/><br></tr>
         <tr><c:out value="Country: ${movie.country}"/><br></tr>
         <tr><c:out value="Category: ${movie.category}"/><br></tr>
+        <tr><c:out value="Rate: ${movie.rate}"/><br></tr>
     </table>
 </c:forEach>
 </body>

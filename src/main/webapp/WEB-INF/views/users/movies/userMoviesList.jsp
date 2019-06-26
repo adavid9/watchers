@@ -29,6 +29,8 @@
             <tr><c:out value="${movie.country}"></c:out><br></tr>
             <tr>Category<br></tr>
             <tr><c:out value="${movie.category}"></c:out><br></tr>
+            <tr>Rate<br></tr>
+            <tr><c:out value="${movie.rate}"></c:out><br></tr>
         </table>
         <form method="POST" action="${contextPath}/myMoviesList/${movie.id}">
             <button type="submit">Remove</button>

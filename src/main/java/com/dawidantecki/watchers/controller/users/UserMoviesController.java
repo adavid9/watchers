@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserMoviesController {
@@ -75,6 +77,17 @@ public class UserMoviesController {
         }
 
         return "users/movies/userMoviesList";
+    }
+
+    @RequestMapping(value = "/topMovies", method = RequestMethod.GET)
+    public String top10Movies(Model model) {
+        List<Movie> movies = movieService.allMovies().stream()
+                .sorted(Comparator.comparingDouble(Movie::getRate).reversed())
+                .limit(10)
+                .collect(Collectors.toList());
+
+        model.addAttribute("movies", movies);
+        return "users/movies/topMovies";
     }
 
     // This method is used to find logged in user

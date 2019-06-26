@@ -33,7 +33,7 @@ public class MovieController {
     @RequestMapping(value = "/addMovie", method = RequestMethod.POST)
     public String create(@RequestParam("title") String title, @RequestParam("description") String description,
                          @RequestParam("release_date") String release_date, @RequestParam("country") String country,
-                         @RequestParam("category") String category, Model model) {
+                         @RequestParam("category") String category, @RequestParam("rate") String rate, Model model) {
         Movie foundMovie = movieService.findMovie(title);
         if (foundMovie != null) {
             model.addAttribute("msgError", "Movie already exists");
@@ -46,7 +46,12 @@ public class MovieController {
         }
 
         Date release = DateParser.parseDate(release_date);
-        Movie movie = new Movie(title, description, release, country, category);
+        double ratio = 0.0;
+        if (rate != null && !rate.equals("")) {
+            ratio = Double.parseDouble(rate);
+        }
+
+        Movie movie = new Movie(title, description, release, country, category, ratio);
 
         movieService.addMovie(movie);
         model.addAttribute("msgSuccess", "Movie created successfully.");
@@ -120,7 +125,7 @@ public class MovieController {
     public String updateMovie(@RequestParam("id") String id, @RequestParam("title") String title,
                               @RequestParam("description") String description, @RequestParam("release_date") String release_date,
                               @RequestParam("country") String country, @RequestParam("category") String category,
-                              Model model) {
+                              @RequestParam("rate") String rate, Model model) {
         Movie movie = movieService.findMovie(Long.parseLong(id));
         if (movie == null) {
             model.addAttribute("msgError", "Movie not found");
@@ -132,6 +137,7 @@ public class MovieController {
         movie.setRelease_date(DateParser.parseDate(release_date));
         movie.setCountry(country);
         movie.setCategory(category);
+        movie.setRate(Double.parseDouble(rate));
 
         movieService.addMovie(movie);
         model.addAttribute("msgSuccess", "Updated successfully");

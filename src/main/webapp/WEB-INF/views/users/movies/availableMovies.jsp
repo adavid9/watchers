@@ -28,6 +28,8 @@
             <tr><c:out value="${movie.country}"/><br></tr>
             <tr>Category<br></tr>
             <tr><c:out value="${movie.category}"/><br></tr>
+            <tr>Rate<br></tr>
+            <tr><c:out value="${movie.rate}"/><br></tr>
         </table>
         <form action="${contextPath}/availableMovies/${movie.id}" method="POST" id="add">
             <button type="submit">Add Movie</button>
