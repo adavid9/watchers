@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
+                .successHandler(getSuccessHandler())
                 .and()
                 .logout()
                 .permitAll()
@@ -64,5 +66,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         accessDeniedHandler.setErrorPage("/accessDenied");
 
         return accessDeniedHandler;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler getSuccessHandler() {
+        return new UrlAuthenticationSuccessHandler();
     }
 }

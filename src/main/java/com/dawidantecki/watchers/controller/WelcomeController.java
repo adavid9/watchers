@@ -26,4 +26,9 @@ public class WelcomeController {
         model.addAttribute("description", messages.get(description));
         return "welcome";
     }
+
+    @RequestMapping(value = "admin/adminStart", method = RequestMethod.GET)
+    public String adminPage() {
+        return "adminStart";
+    }
 }
