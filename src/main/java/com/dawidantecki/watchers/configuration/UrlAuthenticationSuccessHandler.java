@@ -56,7 +56,7 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
         }
 
         if (isUser)
-            return "/";
+            return "/userStart";
         else if (isAdmin)
             return "admin/adminStart";
         else

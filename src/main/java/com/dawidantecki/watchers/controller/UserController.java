@@ -67,7 +67,9 @@ public class UserController {
         userService.addUser(user);
         securityService.autoLogin(username, password);
 
-        return "redirect:/welcome";
+
+        // for now every registered user is (ROLE_USER) based so no need to determine if an admin is registered
+        return "redirect:/userStart";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

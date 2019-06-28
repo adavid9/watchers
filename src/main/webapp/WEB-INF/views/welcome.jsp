@@ -38,29 +38,8 @@
         </form>
 
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a
-                onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-        <div>
-            <button type="button">
-                <a href="${contextPath}/admin/addSeries">
-                    Add Series
-                </a>
-            </button>
-            <button type="button">
-                <a href="${contextPath}/admin/addSeason">
-                    Add Season
-                </a>
-            </button>
-            <button type="button">
-                <a href="${contextPath}/admin/addEpisode">
-                    Add Episode
-                </a>
-            </button>
-            <button type="button">
-                <a href="${contextPath}/admin/addMovie">
-                    Add Movie
-                </a>
-            </button>
-        </div>
+                onclick="document.forms['logoutForm'].submit()">Logout</a>
+        </h2>
     </c:if>
 </div>
 </body>

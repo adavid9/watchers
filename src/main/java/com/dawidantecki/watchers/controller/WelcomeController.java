@@ -31,4 +31,9 @@ public class WelcomeController {
     public String adminPage() {
         return "adminStart";
     }
+
+    @RequestMapping(value = "/userStart", method = RequestMethod.GET)
+    public String userPage() {
+        return "userStart";
+    }
 }
