@@ -25,6 +25,9 @@
         <form action="${contextPath}/admin/deleteAccount/${user.id}" method="GET">
             <button type="submit">Delete Account</button>
         </form>
+        <form action="${contextPath}/admin/changeUserPassword/${user.id}" method="GET">
+            <button type="submit">Change Password</button>
+        </form>
     </c:forEach>
 </div>
 </body>
