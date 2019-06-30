@@ -66,10 +66,10 @@ public class SeriesController {
     public String delete(@PathVariable("id") Long id, Model model) {
         Series foundSeries = seriesService.findById(id);
         if (foundSeries == null) {
-            model.addAttribute("msg", "Series not found");
+            model.addAttribute("msgError", "Series not found");
         } else {
             seriesService.deleteSeries(foundSeries);
-            model.addAttribute("msg", "Series deleted successfully");
+            model.addAttribute("msgSuccess", "Series deleted successfully");
         }
 
         List<Series> series = seriesService.findAll();

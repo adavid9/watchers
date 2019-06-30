@@ -166,6 +166,7 @@ public class EpisodesController {
         episodeService.addEpisode(episode);
 
         model.addAttribute("episode", episode);
+        model.addAttribute("msgSuccess", "Successfully updated a episode");
 
         return "admin/episodes/updateEpisode";
     }

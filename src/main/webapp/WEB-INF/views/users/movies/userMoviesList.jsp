@@ -12,35 +12,55 @@
 <html>
 <head>
     <title>Watchers - User Movies List</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
-<h1><%=SecurityContextHolder.getContext().getAuthentication().getName()%> movie list</h1>
-<p>Hit the remove button if you would like to remove a movie from the list</p>
 <div class="container">
-    <c:forEach items="${movies}" var="movie">
-        <table border="0" width="20%">
-            <tr>Title<br></tr>
-            <tr><c:out value="${movie.title}"></c:out><br></tr>
-            <tr>Description<br></tr>
-            <tr><c:out value="${movie.description}"></c:out><br></tr>
-            <tr>Release<br></tr>
-            <tr><c:out value="${movie.release_date}"></c:out><br></tr>
-            <tr>Country<br></tr>
-            <tr><c:out value="${movie.country}"></c:out><br></tr>
-            <tr>Category<br></tr>
-            <tr><c:out value="${movie.category}"></c:out><br></tr>
-            <tr>Rate<br></tr>
-            <tr><c:out value="${movie.rate}"></c:out><br></tr>
-        </table>
-        <form method="POST" action="${contextPath}/myMoviesList/${movie.id}">
-            <button type="submit">Remove</button>
-        </form>
-    </c:forEach>
+    <h1><%=SecurityContextHolder.getContext().getAuthentication().getName()%> movie list</h1>
+    <p>Hit the remove button if you would like to remove a movie from the list</p>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Release</th>
+            <th scope="col">Country</th>
+            <th scope="col">Category</th>
+            <th scope="col">Rate</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${movies}" var="movie">
+            <tr>
+                <td><c:out value="${movie.title}"/></td>
+                <td><c:out value="${movie.description}"/></td>
+                <td><c:out value="${movie.release_date}"/></td>
+                <td><c:out value="${movie.country}"/></td>
+                <td><c:out value="${movie.category}"/></td>
+                <td><c:out value="${movie.rate}"/></td>
+                <td>
+                    <form method="POST" action="${contextPath}/myMoviesList/${movie.id}">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
     <c:if test="${msgError != null}">
-        <c:out value="${msgError}"></c:out>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
     </c:if>
     <c:if test="${msgSuccess != null}">
-        <c:out value="${msgSuccess}"></c:out>
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"/>
+        </div>
     </c:if>
 </div>
 </body>

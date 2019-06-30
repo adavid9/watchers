@@ -11,23 +11,38 @@
 <html>
 <head>
     <title>Watchers - Season More Info</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
-    <h1>Season more info</h1>
-    <table border="0" width="20%">
-        <tr><b>Series</b><br></tr>
-        <tr><c:out value="title: ${series.title}"></c:out><br></tr>
-        <tr><b>Season</b><br></tr>
-        <tr><c:out value="id: ${season.id}"></c:out><br></tr>
-        <tr><c:out value="name: ${season.name}"></c:out><br></tr>
-        <tr><c:out value="release: ${season.release_date}"></c:out><br></tr>
-        <tr><b>Episodes</b><br></tr>
-        <c:forEach items="${episodes}" var="episode">
-            <tr><c:out value="title: ${episode.title}"></c:out><br></tr>
-            <tr><c:out value="description: ${episode.description}"></c:out><br></tr>
-            <tr><c:out value="release: ${episode.release_date}"></c:out><br></tr>
-        </c:forEach>
+    <h2>Season more info</h2>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Series</th>
+            <th scope="col">Episodes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><c:out value="${season.id}"/></td>
+            <td><c:out value="${season.name}"/></td>
+            <td><c:out value="${season.release_date}"/></td>
+            <td><c:out value="${series.title}"/></td>
+            <td>
+                <c:forEach items="${episodes}" var="episode">
+                    <li><c:out value="${episode.title}"/></li>
+                </c:forEach>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </div>
 </body>

@@ -12,57 +12,63 @@
 <html>
 <head>
     <title>Watchers - Admin Start Page</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
-<h1>Admin Page, you're logged as <c:out value="${user}"></c:out></h1>
-<h3>Available menu</h3>
-<ul>
-    <h4>TV Series:</h4>
+<div class="container">
+    <h1>Admin Page, you're logged as <c:out value="${user}"></c:out></h1>
+    <h3>Available menu</h3>
     <ul>
-        <h4>Series:</h4>
+        <h4>TV Series:</h4>
         <ul>
-            <li><a href="${contextPath}/admin/addSeries">Add Series</a></li>
-            <li><a href="${contextPath}/admin/deleteSeries">Delete Series</a></li>
-            <li><a href="${contextPath}/admin/updateSeries">Edit Series</a></li>
-            <li><a href="${contextPath}/admin/readSeries">Find Series</a></li>
+            <h4>Series:</h4>
+            <ul>
+                <li><a href="${contextPath}/admin/addSeries">Add Series</a></li>
+                <li><a href="${contextPath}/admin/deleteSeries">Delete Series</a></li>
+                <li><a href="${contextPath}/admin/updateSeries">Edit Series</a></li>
+                <li><a href="${contextPath}/admin/readSeries">Find Series</a></li>
+            </ul>
+            <h4>Seasons:</h4>
+            <ul>
+                <li><a href="${contextPath}/admin/addSeason">Add Season</a></li>
+                <li><a href="${contextPath}/admin/deleteSeason">Delete Season</a></li>
+                <li><a href="${contextPath}/admin/updateSeason">Edit Season</a></li>
+                <li><a href="${contextPath}/admin/readSeason">Find Season</a></li>
+            </ul>
+            <h4>Episodes</h4>
+            <ul>
+                <li><a href="${contextPath}/admin/addEpisode">Add Episode</a></li>
+                <li><a href="${contextPath}/admin/deleteEpisode">Delete Episode</a></li>
+                <li><a href="${contextPath}/admin/updateEpisode">Update Episode</a></li>
+                <li><a href="${contextPath}/admin/readEpisode">Find Episode</a></li>
+            </ul>
         </ul>
-        <h4>Seasons:</h4>
+        <h4>Movies</h4>
         <ul>
-            <li><a href="${contextPath}/admin/addSeason">Add Season</a></li>
-            <li><a href="${contextPath}/admin/deleteSeason">Delete Season</a></li>
-            <li><a href="${contextPath}/admin/updateSeason">Edit Season</a></li>
-            <li><a href="${contextPath}/admin/readSeason">Find Season</a></li>
+            <li><a href="${contextPath}/admin/addMovie">Add Movie</a></li>
+            <li><a href="${contextPath}/admin/deleteMovie">Delete Movie</a></li>
+            <li><a href="${contextPath}/admin/updateMovie">Edit Movie</a></li>
+            <li><a href="${contextPath}/admin/readMovie">Find Movie</a></li>
         </ul>
-        <h4>Episodes</h4>
+        <h4>Accounts</h4>
         <ul>
-            <li><a href="${contextPath}/admin/addEpisode">Add Episode</a></li>
-            <li><a href="${contextPath}/admin/deleteEpisode">Delete Episode</a></li>
-            <li><a href="${contextPath}/admin/updateEpisode">Update Episode</a></li>
-            <li><a href="${contextPath}/admin/readEpisode">Find Episode</a></li>
+            <li><a href="${contextPath}/admin/accounts">All Accounts</a></li>
         </ul>
+        <h4>Manage Account</h4>
+        <ul>
+            <li><a href="${contextPath}/changePassword">Change Password</a></li>
+            <li><a href="${contextPath}/deleteAccount">Delete Account</a></li>
+        </ul>
+        <br>
+        <button type="btn btn-primary">
+            <a href="${contextPath}/welcome">
+                Home
+            </a>
+        </button>
     </ul>
-    <h4>Movies</h4>
-    <ul>
-        <li><a href="${contextPath}/admin/addMovie">Add Movie</a></li>
-        <li><a href="${contextPath}/admin/deleteMovie">Delete Movie</a></li>
-        <li><a href="${contextPath}/admin/updateMovie">Edit Movie</a></li>
-        <li><a href="${contextPath}/admin/readMovie">Find Movie</a></li>
-    </ul>
-    <h4>Accounts</h4>
-    <ul>
-        <li><a href="${contextPath}/admin/accounts">All Accounts</a></li>
-    </ul>
-    <h4>Manage Account</h4>
-    <ul>
-        <li><a href="${contextPath}/changePassword">Change Password</a></li>
-        <li><a href="${contextPath}/deleteAccount">Delete Account</a></li>
-    </ul>
-    <br>
-    <button type="button">
-        <a href="${contextPath}/welcome">
-            Home
-        </a>
-    </button>
-</ul>
+</div>
 </body>
 </html>

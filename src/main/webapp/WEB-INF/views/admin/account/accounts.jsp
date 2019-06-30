@@ -11,24 +11,47 @@
 <html>
 <head>
     <title>Watchers - (Admin) All Users</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
     <h1>List of all available users.</h1>
-    <c:forEach items="${users}" var="user">
-        <table border="0" width="20%">
-            <tr>Username: <c:out value="${user.username}"/><br></tr>
-            <tr>Role:<c:forEach items="${user.roles}" var="role">
-                <c:out value="${role.name}"></c:out>
-            </c:forEach><br></tr>
-        </table>
-        <form action="${contextPath}/admin/deleteAccount/${user.id}" method="GET">
-            <button type="submit">Delete Account</button>
-        </form>
-        <form action="${contextPath}/admin/changeUserPassword/${user.id}" method="GET">
-            <button type="submit">Change Password</button>
-        </form>
-    </c:forEach>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="user">
+            <tr>
+                <td><c:out value="${user.username}"/></td>
+                <td>
+                    <c:forEach items="${user.roles}" var="role">
+                        <span><c:out value="${role.name}"/></span>
+                    </c:forEach>
+                </td>
+                <td>
+                    <form action="${contextPath}/admin/deleteAccount/${user.id}" method="GET">
+                        <button type="submit" class="btn btn-danger">Delete Account</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="${contextPath}/admin/changeUserPassword/${user.id}" method="GET">
+                        <button type="submit" class="btn btn-default">Change Password</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

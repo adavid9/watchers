@@ -10,18 +10,39 @@
 <html>
 <head>
     <title>Watchers - All Movies</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
-<h1>All Movies:</h1>
-<c:forEach items="${movies}" var="movie">
-    <table border="0" width="20%">
-        <tr><c:out value="Title: ${movie.title}"/><br></tr>
-        <tr><c:out value="Description: ${movie.description}"/><br></tr>
-        <tr><c:out value="Release: ${movie.release_date}"/><br></tr>
-        <tr><c:out value="Country: ${movie.country}"/><br></tr>
-        <tr><c:out value="Category: ${movie.category}"/><br></tr>
-        <tr><c:out value="Rate: ${movie.rate}"/><br></tr>
+<div class="container">
+    <h2>All Movies</h2>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Country</th>
+            <th scope="col">Category</th>
+            <th scope="col">Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${movies}" var="movie">
+            <tr>
+                <td><c:out value="${movie.title}"/></td>
+                <td><c:out value="${movie.description}"/></td>
+                <td><c:out value="${movie.release_date}"/></td>
+                <td><c:out value="${movie.country}"/></td>
+                <td><c:out value="${movie.category}"/></td>
+                <td><c:out value="${movie.rate}"/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
     </table>
-</c:forEach>
+</div>
 </body>
 </html>

@@ -11,50 +11,65 @@
 <html>
 <head>
     <title>Watchers - Add Movie</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>Add movie:</h1>
+    <h2>Add movie</h2>
+    <hr>
     <form action="${contextPath}/admin/addMovie" method="POST">
-        <table border="0" width="20%">
-            <tr>Title:</tr>
-            <br>
-            <tr><input type="text" name="title"/></tr>
-            <br>
-            <tr>Description:</tr>
-            <br>
-            <textarea name="description" cols="50" rows="5" style="resize: none"></textarea><br>
-            <tr>Release Date:</tr>
-            <br>
-            <tr><input type="date" name="release_date"/></tr>
-            <br>
-            <tr>Country:</tr>
-            <br>
-            <tr><input type="text" name="country"/></tr>
-            <br>
-            <tr>Category:</tr>
-            <br>
-            <tr><input type="text" name="category"/></tr>
-            <br>
-            <tr>Rate:</tr>
-            <br>
-            <tr><input type="number" step="any" name="rate"/></tr>
-            <br>
-            <tr>
-                <button type="submit">Submit</button>
-            </tr>
-        </table>
-        <c:if test="${msgError != null}">
-            <span>
-                <c:out value="${msgError}"></c:out>
-            </span>
-        </c:if>
-        <c:if test="${msgSuccess != null}">
-            <span>
-                <c:out value="${msgSuccess}"></c:out>
-            </span>
-        </c:if>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" class="form-control" id="description" style="resize: none"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="release">Release Date</label>
+            <div class='input-group date' id='datetimepicker4'>
+                <input type="text" id="release" name="release_date" class="form-control"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" name="category" class="form-control" id="category"/>
+        </div>
+        <div class="form-group">
+            <label for="rate">Rate</label>
+            <input type="number" step="any" name="rate" class="form-control" id="rate"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
+    <c:if test="${msgError != null}">
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
+    </c:if>
+    <c:if test="${msgSuccess != null}">
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"/>
+        </div>
+    </c:if>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'dd/MM/yyyy'
+        });
+    });
+</script>
 </body>
 </html>

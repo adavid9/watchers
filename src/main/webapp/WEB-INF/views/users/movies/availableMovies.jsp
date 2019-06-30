@@ -11,36 +11,94 @@
 <html>
 <head>
     <title>Watchers - All Available Movies</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
-<h1>List of available movies</h1>
-<p>Hit the add movie button to add a movie to your movie list.</p>
 <div class="container">
-    <c:forEach items="${movies}" var="movie">
-        <table border="0" width="20%">
-            <tr>Title<br></tr>
-            <tr><c:out value="${movie.title}"/><br></tr>
-            <tr>Description<br></tr>
-            <tr><c:out value="${movie.description}"/><br></tr>
-            <tr>Release<br></tr>
-            <tr><c:out value="${movie.release_date}"/><br></tr>
-            <tr>Country<br></tr>
-            <tr><c:out value="${movie.country}"/><br></tr>
-            <tr>Category<br></tr>
-            <tr><c:out value="${movie.category}"/><br></tr>
-            <tr>Rate<br></tr>
-            <tr><c:out value="${movie.rate}"/><br></tr>
+    <h1>List of available movies</h1>
+    <p>Hit the add movie button to add a movie to your movie list.</p>
+    <hr>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">Country</th>
+                <th scope="col">Category</th>
+                <th scope="col">Rate</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${movies}" var="movie">
+                <tr>
+                    <td><c:out value="${movie.title}"/></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${movie.description.equals('')}">
+                                -
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${movie.description}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${movie.release_date.equals('')}">
+                                -
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${movie.release_date}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${movie.country.equals('')}">
+                                -
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${movie.country}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${movie.category.equals('')}">
+                                -
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${movie.category}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td><c:out value="${movie.rate}"/></td>
+                    <td>
+                        <form action="${contextPath}/availableMovies/${movie.id}" method="POST" id="add">
+                            <button type="submit" class="btn btn-default">Add Movie</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
         </table>
-        <form action="${contextPath}/availableMovies/${movie.id}" method="POST" id="add">
-            <button type="submit">Add Movie</button>
-        </form>
-    </c:forEach>
-    <c:if test="${msgError != null}">
-        <c:out value="${msgError}"></c:out>
-    </c:if>
-    <c:if test="${msgSuccess != null}">
-        <c:out value="${msgSuccess}"></c:out>
-    </c:if>
+        <c:if test="${msgError != null}">
+            <div class="alert alert-danger">
+                <c:out value="${msgError}"></c:out>
+            </div>
+        </c:if>
+        <c:if test="${msgSuccess != null}">
+            <div class="alert alert-success">
+                <c:out value="${msgSuccess}"></c:out>
+            </div>
+        </c:if>
+    </div>
 </div>
 </body>
 </html>

@@ -11,25 +11,34 @@
 <html>
 <head>
     <title>Watchers - Change Selected Account Password</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
     <form action="${contextPath}/admin/changeUserPassword" method="POST">
-        <table border="0" width="20%">
-            <input type="hidden" name="id" value="<c:out value="${account.id}"/>"/>
-            <tr>Username:<br></tr>
-            <tr><input type="text" name="username" disabled="disabled"
-                       value="<c:out value="${account.username}"/>"/><br>
-            </tr>
-            <tr>Password<br></tr>
-            <tr><input type="password" name="password"/><br></tr>
-            <tr>Confirm Password<br></tr>
-            <tr><input type="password" name="confirmPassword"/><br></tr>
-        </table>
-        <button type="submit">Save</button>
+        <input type="hidden" name="id" value="<c:out value="${account.id}"/>"/>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" disabled="disabled"
+                   value="<c:out value="${account.username}"/>"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password"/>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
     <c:if test="${msgError != null}">
-        <c:out value="${msgError}"></c:out>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
     </c:if>
 </div>
 </body>

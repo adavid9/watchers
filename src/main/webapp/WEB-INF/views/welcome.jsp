@@ -11,6 +11,10 @@
 <html>
 <head>
     <title>Watchers - Home</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
@@ -21,12 +25,12 @@
                 <p><c:out value="${description}"></c:out></p>
             </c:if>
         </c:if>
-        <button type="button">
+        <button type="button" class="btn btn-default">
             <a href="${contextPath}/registration">
                 Register
             </a>
         </button>
-        <button type="button">
+        <button type="button" class="btn btn-default">
             <a href="${contextPath}/login">
                 Login
             </a>

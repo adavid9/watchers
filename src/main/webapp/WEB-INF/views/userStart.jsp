@@ -12,28 +12,34 @@
 <html>
 <head>
     <title>Watchers - User Start Page</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
-<h1>User Page, you're logged in as <c:out value="${user}"></c:out></h1>
-<h3>Available menu</h3>
-<ul>
-    <h4>Account:</h4>
+<div class="container">
+    <h1>User Page, you're logged in as <c:out value="${user}"></c:out></h1>
+    <h3>Available menu</h3>
     <ul>
-        <li><a href="${contextPath}/changePassword">Change Password</a></li>
-        <li><a href="${contextPath}/deleteAccount">Delete Account</a></li>
-    </ul>
-    <h4>Movies:</h4>
-    <ul>
-        <li><a href="${contextPath}/myMoviesList">My Movies</a></li>
-        <li><a href="${contextPath}/availableMovies">Available Movies</a></li>
-        <li><a href="${contextPath}/topMovies">Top 10 Movies</a></li>
-    </ul>
-    <br><br>
-    <button type="button">
+        <h4>Account:</h4>
+        <ul>
+            <li><a href="${contextPath}/changePassword">Change Password</a></li>
+            <li><a href="${contextPath}/deleteAccount">Delete Account</a></li>
+        </ul>
+        <h4>Movies:</h4>
+        <ul>
+            <li><a href="${contextPath}/myMoviesList">My Movies</a></li>
+            <li><a href="${contextPath}/availableMovies">Available Movies</a></li>
+            <li><a href="${contextPath}/topMovies">Top 10 Movies</a></li>
+        </ul>
+        <br><br>
         <a href="${contextPath}/welcome">
-            Home
+            <button type="button" class="btn btn-default">
+                Home
+            </button>
         </a>
-    </button>
-</ul>
+    </ul>
+</div>
 </body>
 </html>

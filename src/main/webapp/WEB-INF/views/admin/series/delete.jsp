@@ -11,63 +11,66 @@
 <html>
 <head>
     <title>Watchers - Delete Series</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
+    <h2>Delete series</h2>
+    <p>If you delete a series, all related seasons and episodes will be also removed.</p>
+    <hr>
     <form method="POST" action="${contextPath}/admin/deleteSeries">
-        <p>Title:<br>
-            <input type="text" name="title"/>
-        </p>
-        <button type="submit">Delete</button>
+        <h3>Delete series by title</h3>
+        <hr>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
+    <br>
+    <h3>Delete series by button</h3>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Country</th>
+            <th scope="col">Director</th>
+            <th scope="col">-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${series}" var="series">
+            <tr>
+                <td><c:out value="${series.id}"/></td>
+                <td><c:out value="${series.title}"/></td>
+                <td><c:out value="${series.description}"/></td>
+                <td><c:out value="${series.country}"/></td>
+                <td><c:out value="${series.director}"/></td>
+                <td>
+                    <form action="${contextPath}/admin/deleteSeries/${s.id}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
     <c:if test="${msgError != null}">
-        <span><c:out value="${msgError}"/></span>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
     </c:if>
     <c:if test="${msgSuccess != null}">
-            <span>
-                <c:out value="${msgSuccess}"/>
-            </span>
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"/>
+        </div>
     </c:if>
-    <br><br>
-    <c:forEach items="${series}" var="s">
-        <table border="0" width="20%">
-            <tr>
-                <c:out value="Series id: ${s.id}"/><br>
-            </tr>
-            <tr>
-                <c:out value="Series title: ${s.title}"/><br>
-            </tr>
-            <tr>
-                <c:out value="Series description: ${s.description}" /><br>
-            </tr>
-            <tr>
-                <c:out value="Series country: ${s.country}" /><br>
-            </tr>
-            <tr>
-                <c:out value="Series director: ${s.director}" /><br>
-            </tr>
-            <c:forEach items="${s.seasons}" var="seasons">
-                <tr>
-                    <c:out value="Season title: ${seasons.name}" /><br>
-                </tr>
-                <tr>
-                    <c:out value="Season espidoesNo: ${seasons.episodesNo}" /><br>
-                </tr>
-                <tr>
-                    <c:out value="Season release: ${seasons.release_date}" /><br>
-                </tr>
-            </c:forEach>
-            <form action="${contextPath}/admin/deleteSeries/${s.id}" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-            <c:if test="${msg} != null">
-                <span>
-                    <c:out value="${msg}" />
-                </span>
-            </c:if>
-        </table>
-    </c:forEach>
 </div>
-
 </body>
 </html>

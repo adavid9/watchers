@@ -11,26 +11,38 @@
 <html>
 <head>
     <title>Watchers - Delete Account</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
     <h1>Delete your account</h1>
     <p>To delete account you have to provide matching password to your account password.</p>
+    <hr>
     <form method="POST" action="${contextPath}/deleteAccount" id="deleteAccount">
-        <table border="0" width="20%">
-            <input type="hidden" name="id" value="<c:out value="${user.id}"/>"/>
-            <tr>Username:<br></tr>
-            <tr><input type="text" disabled="disabled" name="username" value="<c:out value="${user.username}"/>"><br>
-            </tr>
-            <tr>Password:<br></tr>
-            <tr><input type="password" name="password"><br></tr>
-            <tr>Are you sure?</tr>
-            <tr><input type="checkbox" name="isSure" /></tr>
-        </table>
-        <button type="submit">Delete</button>
+        <input type="hidden" name="id" value="<c:out value="${user.id}"/>"/>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" disabled="disabled" name="username"
+                   value="<c:out value="${user.username}"/>">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control"/>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="isSure"/>Are you sure?
+            </label>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
     <c:if test="${msgError != null}">
-        <c:out value="${msgError}"></c:out>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"></c:out>
+        </div>
     </c:if>
 </div>
 </body>

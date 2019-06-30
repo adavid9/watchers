@@ -11,39 +11,66 @@
 <html>
 <head>
     <title>Watchers - Update Selected Series</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="container">
+    <h2>Update Selected Series</h2>
+    <hr>
     <form method="POST" action="${contextPath}/admin/updateSeries">
-        <table border="0" width="20%">
-            <input type="hidden" name="id" value="<c:out value="${series.id}"/>"/>
-            <tr>Title:<br></tr>
-            <tr><input type="text" name="title" value="<c:out value="${series.title}"/>"/><br></tr>
-            <tr>Description:<br></tr>
-            <tr>
-                <textarea name="description" cols="50" rows="5" style="resize: none"><c:out
-                        value="${series.description}"/></textarea><br>
-            </tr>
-            <tr>Release:<br></tr>
-            <tr><input type="date" name="release_date" value="<c:out value="${series.release_date}"/>"/><br></tr>
-            <tr>Country:<br></tr>
-            <tr><input type="text" name="country" value="<c:out value="${series.country}"/>"/><br></tr>
-            <tr>Director:<br></tr>
-            <tr><input type="text" name="director" value="<c:out value="${series.director}"/>"/></tr>
-            <br>
-        </table>
-        <button type="submit">Update</button>
-        <c:if test="${msgError != null}">
-            <span>
-                <c:out value="${msgError}"></c:out>
-            </span>
-        </c:if>
-        <c:if test="${msgSuccess != null}">
-            <span>
-                <c:out value="${msgSuccess}"></c:out>
-            </span>
-        </c:if>
+        <input type="hidden" name="id" value="<c:out value="${series.id}"/>"/>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control" value="<c:out value="${series.title}"/>"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" class="form-control" id="description" style="resize: none"><c:out
+                    value="${series.description}"/></textarea>
+        </div>
+        <div class="form-group">
+            <label for="release">Release Date</label>
+            <div class='input-group date' id='datetimepicker4'>
+                <input type="text" id="release" name="release_date" class="form-control"
+                       value="<c:out value="${series.release_date}"/>"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country" class="form-control"
+                   value="<c:out value="${series.country}"/>"/>
+        </div>
+        <div class="form-group">
+            <label for="director">Director</label>
+            <input type="text" id="director" class="form-control" name="director"
+                   value="<c:out value="${series.director}"/>"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
+    <c:if test="${msgError != null}">
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
+    </c:if>
+    <c:if test="${msgSuccess != null}">
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"/>
+        </div>
+    </c:if>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+</script>
 </body>
 </html>

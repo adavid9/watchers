@@ -11,29 +11,51 @@
 <html>
 <head>
     <title>Watchers - Update Selected Season</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="container">
+    <h2>Update Selected Season</h2>
+    <hr>
     <form method="POST" action="${contextPath}/admin/updateSeason">
-        <table border="0" width="20%">
-            <input type="hidden" name="id" value="<c:out value="${season.id}"/>"/>
-            <tr>Name:<br></tr>
-            <tr><input type="text" name="name" value="<c:out value="${season.name}"/>"/><br></tr>
-            <tr>Release:<br></tr>
-            <tr><input type="date" name="release_date" value="<c:out value="${season.release_date}"/>"/><br></tr>
-        </table>
-        <button type="submit">Update</button>
-        <c:if test="${msgError != null}">
-            <span>
-                <c:out value="${msgError}"></c:out>
-            </span>
-        </c:if>
-        <c:if test="${msgSuccess != null}">
-            <span>
-                <c:out value="${msgSuccess}"></c:out>
-            </span>
-        </c:if>
+        <input type="hidden" name="id" value="<c:out value="${season.id}"/>"/>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="<c:out value="${season.name}"/>"/>
+        </div>
+        <div class="form-group">
+            <label for="release">Release Date</label>
+            <div class='input-group date' id='datetimepicker4'>
+                <input type="text" id="release" name="release_date" class="form-control"
+                       value="<c:out value="${season.release_date}"/>"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
+    <c:if test="${msgError != null}">
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
+    </c:if>
+    <c:if test="${msgSuccess != null}">
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"/>
+        </div>
+    </c:if>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+</script>
 </body>
 </html>

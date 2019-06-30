@@ -11,32 +11,53 @@
 <html>
 <head>
     <title>Watchers - Create Season</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="container">
+    <h2>Add Season</h2>
+    <hr>
     <form method="POST" action="${contextPath}/admin/addSeason">
-        <h1>Add Season:</h1>
-        <p>Name:<br>
-            <input type="text" name="name"/>
-        </p>
-        <p>Release:<br>
-            <input type="date" name="release_date"/>
-        </p>
-        <p>Series title:
-            <input type="text" name="seriesTitle"/>
-        </p>
-        <c:if test="${msgError != null}">
-                <span>
-                    <c:out value="${msgError}"/>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="release">Release Date</label>
+            <div class='input-group date' id='datetimepicker4'>
+                <input type="text" id="release" name="release_date" class="form-control"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
                 </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="seriesTitle">Series Title</label>
+            <input type="text" class="form-control" id="seriesTitle" name="seriesTitle"/>
+        </div>
+        <c:if test="${msgError != null}">
+            <div class="alert alert-danger">
+                <c:out value="${msgError}"/>
+            </div>
         </c:if>
         <c:if test="${msgSuccess != null}">
-                <span>
-                    <c:out value="${msgSuccess}"/>
-                </span>
+            <div class="alert alert-success">
+                <c:out value="${msgSuccess}"/>
+            </div>
         </c:if>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+</script>
 </body>
 </html>

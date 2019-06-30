@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set value="${pageContext.request.contextPath}" var="contextPath"/>
 <%--
   Created by IntelliJ IDEA.
   User: adavid
@@ -10,21 +11,45 @@
 <html>
 <head>
     <title>Watchers - Episode More Info</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
-    <h1>Episode more info:</h1>
-    <table border="0" width="20%">
-        <tr><b>Episode</b><br></tr>
-        <tr><c:out value="id: ${episode.id}"></c:out><br></tr>
-        <tr><c:out value="title: ${episode.title}"></c:out><br></tr>
-        <tr><c:out value="description: ${episode.description}"></c:out><br></tr>
-        <tr><c:out value="release: ${episode.release_date}"></c:out><br></tr>
-        <tr><b>Season</b><br></tr>
-        <tr><c:out value="name: ${season.name}"></c:out><br></tr>
-        <tr><b>Series</b><br></tr>
-        <tr><c:out value="title: ${series.title}"></c:out><br></tr>
+    <h2>Episode more info</h2>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Season</th>
+            <th scope="col">Series</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><c:out value="${episode.id}"/></td>
+            <td><c:out value="${episode.title}"/></td>
+            <td><c:out value="${episode.description}"/></td>
+            <td><c:out value="${episode.release_date}"/></td>
+            <td><c:out value="${season.name}"/></td>
+            <td><c:out value="${series.title}"/></td>
+        </tr>
+        </tbody>
+        <a href="${contextPath}/admin/readEpisode">
+            <button type="button" class="btn btn-default">Back</button>
+        </a>
     </table>
+    <c:if test="${msgError}">
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
+    </c:if>
 </div>
 </body>
 </html>

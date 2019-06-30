@@ -11,18 +11,39 @@
 <html>
 <head>
     <title>Watchers - Selected Account</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
-    <table border="0" width="20%">
-        <tr>Username: <c:out value="${account.username}"/><br></tr>
-        <tr>Role:<c:forEach items="${account.roles}" var="role">
-            <c:out value="${role.name}"></c:out>
-        </c:forEach><br></tr>
+    <h1>Delete previously selected account</h1>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Roles</th>
+            <th scope="col">-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><c:out value="${account.username}"/></td>
+            <td>
+                <c:forEach var="role" items="${account.roles}">
+                    <span><c:out value="${role.name}"/></span>
+                </c:forEach>
+            </td>
+            <td>
+                <form action="${contextPath}/admin/deleteAccount/${account.id}" method="POST">
+                    <button type="submit">Delete Account</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
     </table>
-    <form action="${contextPath}/admin/deleteAccount/${account.id}" method="POST">
-        <button type="submit">Delete Account</button>
-    </form>
 </div>
 </body>
 </html>

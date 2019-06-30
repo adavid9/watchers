@@ -11,32 +11,45 @@
 <html>
 <head>
     <title>Watchers - Update Episodes</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
-    <h1>Update Series</h1>
-    <br>
-    <c:forEach items="${episodes}" var="episode">
-        <table border="0" width="20%">
-            <tr><c:out value="Episode id: ${episode.id}"></c:out><br></tr>
-            <tr><c:out value="Episode title: ${episode.title}"></c:out><br></tr>
-            <tr><c:out value="Episode description: ${episode.description}"></c:out><br></tr>
-            <tr><c:out value="Episode release: ${episode.release_date}"></c:out><br></tr>
-        </table>
-        <form action="${contextPath}/admin/updateEpisode/${episode.id}" method="POST">
-            <button type="submit">Update Episode</button>
-        </form>
-    </c:forEach>
+    <h2>Update Series</h2>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${episodes}" var="episode">
+            <tr>
+                <td><c:out value="${episode.id}"/></td>
+                <td><c:out value="${episode.title}"/></td>
+                <td><c:out value="${episode.description}"/></td>
+                <td><c:out value="${episode.release_date}"/></td>
+                <td>
+                    <form action="${contextPath}/admin/updateEpisode/${episode.id}" method="POST">
+                        <button type="submit" class="btn btn-default">Update</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
     <c:if test="${msgError != null}">
-        <span>
-            <c:out value="${msgError}"></c:out>
-        </span>
-    </c:if>
-
-    <c:if test="${msgSuccess != null}">
-        <span>
-            <c:out value="${msgSuccess}"></c:out>
-        </span>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"/>
+        </div>
     </c:if>
 </div>
 </body>

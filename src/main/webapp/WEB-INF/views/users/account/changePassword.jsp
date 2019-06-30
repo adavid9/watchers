@@ -11,26 +11,43 @@
 <html>
 <head>
     <title>Watchers - Change Password</title>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
+    <h2>Change Your Password:</h2>
     <form method="POST" action="${contextPath}/changePassword">
-        <table border="0" width="20%">
-            <input type="hidden" name="id" value="<c:out value="${user.id}"/>"/>
-            <tr>Username<br></tr>
-            <tr><input type="text" disabled="disabled" value="<c:out value="${user.username}"/>"/><br></tr>
-            <tr>Password<br></tr>
-            <tr><input type="password" name="password"/><br></tr>
-            <tr>Confirm Password<br></tr>
-            <tr><input type="password" name="confirmPassword"/><br></tr>
-        </table>
-        <button type="submit">Save</button>
+        <input type="hidden" name="id" value="<c:out value="${user.id}"/>"/>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" disabled="disabled" value="<c:out value="${user.username}"/>" class="form-control"
+                   id="username"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password"/>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="${contextPath}/admin/adminStart">
+            <button type="button" class="btn btn-default">Back</button>
+        </a>
     </form>
     <c:if test="${msgError != null}">
-        <c:out value="${msgError}"></c:out>
+        <div class="alert alert-danger">
+            <c:out value="${msgError}"></c:out>
+        </div>
     </c:if>
     <c:if test="${msgSuccess != null}">
-        <c:out value="${msgSuccess}"></c:out>
+        <div class="alert alert-success">
+            <c:out value="${msgSuccess}"></c:out>
+        </div>
     </c:if>
 </div>
 </body>
