@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +23,7 @@ public class Movie {
     @Column(name = "description")
     private String description;
     @Column(name = "release_date")
-    @Temporal(TemporalType.DATE)
-    private Date release_date;
+    private String release_date;
     @Column(name = "country")
     private String country;
     @Column(name = "category")
@@ -47,7 +45,7 @@ public class Movie {
         this.title = title;
     }
 
-    public Movie(String title, String description, Date release_date, String country, String category, double rate) {
+    public Movie(String title, String description, String release_date, String country, String category, double rate) {
         this.title = title;
         this.description = description;
         this.release_date = release_date;

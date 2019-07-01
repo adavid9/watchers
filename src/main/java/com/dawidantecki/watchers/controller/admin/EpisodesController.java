@@ -5,7 +5,6 @@ import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
 import com.dawidantecki.watchers.data.service.EpisodeService;
 import com.dawidantecki.watchers.data.service.SeasonService;
-import com.dawidantecki.watchers.util.DateParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,10 +48,6 @@ public class EpisodesController {
             return "admin/episodes/create";
         }
 
-        Date date = null;
-        if (release_date != null)
-            date = DateParser.parseDate(release_date);
-
         Season season = null;
         if (seasonName != null) {
             season = seasonService.findByName(seasonName);
@@ -64,7 +58,7 @@ public class EpisodesController {
             return "admin/episodes/create";
         }
 
-        Episode episode = new Episode(title, description, date, season);
+        Episode episode = new Episode(title, description, release_date, season);
         episodeService.addEpisode(episode);
         model.addAttribute("msgSuccess", "Episode successfully created");
 
@@ -162,7 +156,7 @@ public class EpisodesController {
 
         episode.setTitle(title);
         episode.setDescription(description);
-        episode.setRelease_date(DateParser.parseDate(release_date));
+        episode.setRelease_date(release_date);
         episodeService.addEpisode(episode);
 
         model.addAttribute("episode", episode);

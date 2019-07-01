@@ -67,7 +67,7 @@
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker4').datetimepicker({
-            format: 'dd/MM/yyyy'
+            format: 'YYYY-MM-DD'
         });
     });
 </script>

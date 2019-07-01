@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @ToString
@@ -20,8 +19,7 @@ public class Episode {
     @Column(name = "description")
     private String description;
     @Column(name = "release_date")
-    @Temporal(TemporalType.DATE)
-    private Date release_date;
+    private String release_date;
     @ManyToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Season season;
@@ -35,7 +33,7 @@ public class Episode {
         this.description = description;
     }
 
-    public Episode(String title, String description, Date release_date, Season season) {
+    public Episode(String title, String description, String release_date, Season season) {
         this.title = title;
         this.description = description;
         this.release_date = release_date;

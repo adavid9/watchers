@@ -4,7 +4,6 @@ import com.dawidantecki.watchers.data.entity.Episode;
 import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
 import com.dawidantecki.watchers.data.service.SeriesService;
-import com.dawidantecki.watchers.util.DateParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +47,7 @@ public class SeriesController {
 
         Series newSeries = new Series(title, description, country, director);
         if (release_date != null)
-            newSeries.setRelease_date(DateParser.parseDate(release_date));
+            newSeries.setRelease_date(release_date);
 
         seriesService.addSeries(newSeries);
         model.addAttribute("msgSuccess", "Successfully saved!");
@@ -154,7 +153,7 @@ public class SeriesController {
         series.setDescription(description);
         series.setCountry(country);
         series.setDirector(director);
-        series.setRelease_date(DateParser.parseDate(release_date));
+        series.setRelease_date(release_date);
 
         seriesService.addSeries(series);
         model.addAttribute("msgSuccess", "Successfully updated");

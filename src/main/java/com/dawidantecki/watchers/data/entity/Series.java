@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,8 +27,7 @@ public class Series {
     @Column(name = "director")
     private String director;
     @Column(name = "release_date")
-    @Temporal(TemporalType.DATE)
-    private Date release_date;
+    private String release_date;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "series_id")
     @EqualsAndHashCode.Exclude

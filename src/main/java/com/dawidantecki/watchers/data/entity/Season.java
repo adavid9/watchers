@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -20,8 +19,7 @@ public class Season {
     @Column(name = "name")
     private String name;
     @Column(name = "release_date")
-    @Temporal(TemporalType.DATE)
-    private Date release_date;
+    private String release_date;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

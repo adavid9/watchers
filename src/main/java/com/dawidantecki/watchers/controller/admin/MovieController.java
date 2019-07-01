@@ -2,7 +2,6 @@ package com.dawidantecki.watchers.controller.admin;
 
 import com.dawidantecki.watchers.data.entity.Movie;
 import com.dawidantecki.watchers.data.service.MovieService;
-import com.dawidantecki.watchers.util.DateParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -44,14 +42,12 @@ public class MovieController {
             model.addAttribute("msgError", "Wrong title");
             return "admin/movies/create";
         }
-
-        Date release = DateParser.parseDate(release_date);
         double ratio = 0.0;
         if (rate != null && !rate.equals("")) {
             ratio = Double.parseDouble(rate);
         }
 
-        Movie movie = new Movie(title, description, release, country, category, ratio);
+        Movie movie = new Movie(title, description, release_date, country, category, ratio);
 
         movieService.addMovie(movie);
         model.addAttribute("msgSuccess", "Movie created successfully.");
@@ -134,7 +130,7 @@ public class MovieController {
 
         movie.setTitle(title);
         movie.setDescription(description);
-        movie.setRelease_date(DateParser.parseDate(release_date));
+        movie.setRelease_date(release_date);
         movie.setCountry(country);
         movie.setCategory(category);
         movie.setRate(Double.parseDouble(rate));

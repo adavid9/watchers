@@ -5,7 +5,6 @@ import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
 import com.dawidantecki.watchers.data.service.SeasonService;
 import com.dawidantecki.watchers.data.service.SeriesService;
-import com.dawidantecki.watchers.util.DateParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +50,7 @@ public class SeasonController {
         Season season = new Season(name);
 
         if (release_date != null) {
-            season.setRelease_date(DateParser.parseDate(release_date));
+            season.setRelease_date(release_date);
         }
 
         Series series = null;
@@ -164,7 +163,7 @@ public class SeasonController {
         }
 
         season.setName(name);
-        season.setRelease_date(DateParser.parseDate(release_date));
+        season.setRelease_date(release_date);
         seasonService.addSeason(season);
 
         model.addAttribute("msgSuccess", "Successfully updated");
