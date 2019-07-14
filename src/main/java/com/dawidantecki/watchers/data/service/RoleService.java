@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.data.service;
 
 import com.dawidantecki.watchers.data.entity.Role;
+import com.dawidantecki.watchers.data.entity.RoleName;
 import com.dawidantecki.watchers.data.repository.RoleRepository;
 import com.dawidantecki.watchers.exceptions.RoleAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class RoleService {
     public void addRole(Role role) {
         if (role == null)
             return;
-        Role existingRole = roleRepository.findByName(role.getName());
+        Role existingRole = roleRepository.findByRoleName(role.getRoleName());
         if (existingRole != null)
-            throw new RoleAlreadyExistsException("Role " + role.getName() + " already exists, cannot add role with the same name.");
+            throw new RoleAlreadyExistsException("Role " + role.getRoleName().name() + " already exists, cannot add role with the same name.");
         else
             roleRepository.save(role);
     }
@@ -42,8 +43,8 @@ public class RoleService {
         return roleRepository.findById(id).orElse(null);
     }
 
-    public Role findByName(String name) {
-        return roleRepository.findByName(name);
+    public Role findByName(RoleName name) {
+        return roleRepository.findByRoleName(name);
     }
 
     public void deleteRole(long id) {
@@ -53,8 +54,8 @@ public class RoleService {
         roleRepository.delete(role);
     }
 
-    public void deleteRole(String name) {
-        Role role = roleRepository.findByName(name);
+    public void deleteRole(RoleName name) {
+        Role role = roleRepository.findByRoleName(name);
         if (role == null)
             return;
         deleteRole(role.getId());

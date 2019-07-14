@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.controller;
 
 import com.dawidantecki.watchers.data.entity.Role;
+import com.dawidantecki.watchers.data.entity.RoleName;
 import com.dawidantecki.watchers.data.entity.User;
 import com.dawidantecki.watchers.data.service.RoleService;
 import com.dawidantecki.watchers.data.service.SecurityService;
@@ -54,11 +55,11 @@ public class UserController {
 
         Role role = null;
         if (roleName != null) {
-            role = roleService.findByName(roleName);
+            role = roleService.findByName(RoleName.valueOf(roleName.toUpperCase()));
         }
 
         if (role == null) {
-            role = new Role(roleName);
+            role = new Role(RoleName.valueOf(roleName.toUpperCase()));
         }
 
         User user = new User(username, password, confirmPassword);

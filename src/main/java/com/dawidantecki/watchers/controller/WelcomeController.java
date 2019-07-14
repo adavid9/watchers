@@ -19,8 +19,8 @@ public class WelcomeController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String home(Model model) {
-        var welcome = "welcome.message";
-        var description = "description.message";
+        String welcome = "welcome.message";
+        String description = "description.message";
 
         model.addAttribute("msg", messages.get(welcome));
         model.addAttribute("description", messages.get(description));
