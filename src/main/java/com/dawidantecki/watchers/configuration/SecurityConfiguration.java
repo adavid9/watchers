@@ -39,7 +39,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .successHandler(getSuccessHandler())
                 .and()
                 .logout()
+                .deleteCookies("JSESSIONID")
                 .permitAll()
+                .and()
+                .rememberMe()
+                .tokenValiditySeconds(24 * 60 * 60)
+                .key("watchers")
                 .and()
                 .csrf().disable()
                 .cors().disable();
