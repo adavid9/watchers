@@ -19,12 +19,7 @@
 <body>
 <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name == null}">
-        <c:if test="${msg != null}">
-            <h1><c:out value="${msg}"></c:out></h1>
-            <c:if test="${description != null}">
-                <p><c:out value="${description}"></c:out></p>
-            </c:if>
-        </c:if>
+        <h1>!!!Welcome in Watchers!!!</h1>
         <button type="button" class="btn btn-default">
             <a href="${contextPath}/registration">
                 Register
