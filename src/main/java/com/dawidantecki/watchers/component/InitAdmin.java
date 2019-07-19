@@ -42,7 +42,7 @@ public class InitAdmin {
         roleService.addRole(roles);
 
         // create admin user
-        User user1 = new User("admin", "admin", "admin");
+        User user1 = new User("watchers_admin", "watchers@email.com", "admin", "admin");
         user1.setRoles(Collections.singleton(admin));
         userService.addUser(user1);
 

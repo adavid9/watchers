@@ -24,6 +24,7 @@
         <thead>
         <tr>
             <th scope="col">Username</th>
+            <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">-</th>
             <th scope="col">-</th>
@@ -33,9 +34,10 @@
         <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.username}"/></td>
+                <td><c:out value="${user.email}"/></td>
                 <td>
                     <c:forEach items="${user.roles}" var="role">
-                        <span><c:out value="${role.name}"/></span>
+                        <span><c:out value="${role.roleName.name()}"/></span>
                     </c:forEach>
                 </td>
                 <td>

@@ -29,7 +29,19 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        try {
+            return userRepository.findByUsername(username);
+        } catch (NullPointerException npe) {
+            return null;
+        }
+    }
+
+    public User findByEmail(String email) {
+        try {
+            return userRepository.findByEmail(email);
+        } catch (NullPointerException npe) {
+            return null;
+        }
     }
 
     public List<User> findAll() {
@@ -39,16 +51,24 @@ public class UserService {
     public void addUser(User user) {
         if (user == null)
             return;
-        User actualUser = userRepository.findByUsername(user.getUsername());
-        // if the actual user id is different then user id that means the user already exists and cannot be saved 2nd time.
-        if (actualUser != null && !actualUser.getId().equals(user.getId())) {
-            throw new UserAlreadyExistsException("User with " + user.getUsername() + " username already exists");
+        User byLogin = userRepository.findByUsername(user.getUsername());
+        User byEmail = userRepository.findByEmail(user.getEmail());
+        boolean exists = false;
+        if (byLogin != null || byEmail != null) {
+            exists = true;
         }
-        // allow to edit existing user if the id is the same ( that means that this is the same user and this will be update )
-        if (actualUser != null)
-            user.setUsername(user.getUsername());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+
+        if (exists) {
+            byLogin.setUsername(user.getUsername());
+            byLogin.setEmail(user.getEmail());
+            byLogin.setPassword(passwordEncoder.encode(user.getPassword()));
+            byLogin.setRoles(user.getRoles());
+            byLogin.setUser_movies(user.getUser_movies());
+            userRepository.save(byLogin);
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+        }
     }
 
     public void addUser(Collection<User> users) {

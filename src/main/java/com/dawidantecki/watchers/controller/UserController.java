@@ -6,6 +6,7 @@ import com.dawidantecki.watchers.data.entity.User;
 import com.dawidantecki.watchers.data.service.RoleService;
 import com.dawidantecki.watchers.data.service.SecurityService;
 import com.dawidantecki.watchers.data.service.UserService;
+import com.dawidantecki.watchers.validators.CustomFieldValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +34,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@RequestParam("username") String username, @RequestParam("password") String password,
-                               @RequestParam("confirmPassword") String confirmPassword,
+    public String registration(@RequestParam("username") String username, @RequestParam("email") String email,
+                               @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
                                @RequestParam("roleName") String roleName, Model model) {
 
         User foundUser = userService.findByUsername(username);
@@ -62,7 +63,12 @@ public class UserController {
             role = new Role(RoleName.valueOf(roleName.toUpperCase()));
         }
 
-        User user = new User(username, password, confirmPassword);
+        if (!CustomFieldValidator.isEmailValid(email)) {
+            model.addAttribute("msgError", "Email is invalid");
+            return "registration";
+        }
+
+        User user = new User(username, email, password, confirmPassword);
         user.getRoles().add(role);
 
         userService.addUser(user);

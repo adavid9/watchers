@@ -19,6 +19,8 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
+    @Column(name = "email")
+    private String email;
     @Column(name = "password")
     private String password;
     @Transient
@@ -43,8 +45,9 @@ public class User {
         this.username = username;
     }
 
-    public User(String username, String password, String confirmPassword) {
+    public User(String username, String email, String password, String confirmPassword) {
         this.username = username;
+        this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }

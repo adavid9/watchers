@@ -33,7 +33,7 @@
             <td><c:out value="${account.username}"/></td>
             <td>
                 <c:forEach var="role" items="${account.roles}">
-                    <span><c:out value="${role.name}"/></span>
+                    <span><c:out value="${role.roleName.name()}"/></span>
                 </c:forEach>
             </td>
             <td>

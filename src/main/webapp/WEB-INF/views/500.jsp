@@ -22,7 +22,14 @@
         Something went wrong!
     </h3>
     <pre>
-        <c:out value="${errorMsg}" />
+        <c:choose>
+            <c:when test="${errorMsg != null}">
+                <c:out value="${errorMsg}"/>
+            </c:when>
+            <c:otherwise>
+                No message...
+            </c:otherwise>
+        </c:choose>
     </pre>
     <br>
     <a href="${contextPath}/welcome">
