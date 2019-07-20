@@ -35,16 +35,18 @@ public class SeasonService {
     }
 
     public void addSeason(Season season) {
-        if (season != null)
+        if (season == null)
+            return;
+        Season s = findByName(season.getName());
+        if (s != null) {
+            s.setName(season.getName());
+            s.setRelease_date(season.getRelease_date());
+            s.setSeries(season.getSeries());
+            s.setEpisodes(season.getEpisodes());
+            seasonRepository.save(s);
+        } else {
             seasonRepository.save(season);
-    }
-
-    public void addSeasons(Collection<Season> seasons) {
-        if (seasons.size() > 0)
-            seasons.forEach(x -> {
-                if (x != null)
-                    addSeason(x);
-            });
+        }
     }
 
     public void deleteSeasonById(long id) {
@@ -52,21 +54,8 @@ public class SeasonService {
         deleteOperation(season);
     }
 
-    public void deleteSeasonByName(String name) {
-        Season season = seasonRepository.findByName(name);
-        deleteOperation(season);
-    }
-
     public void deleteSeason(Season season) {
         deleteSeasonById(season.getId());
-    }
-
-    public void deleteSeasons(Collection<Season> seasons) {
-        if (seasons.size() > 0)
-            seasons.forEach(x -> {
-                if (x != null)
-                    deleteOperation(x);
-            });
     }
 
     public void deleteOperation(Season season) {

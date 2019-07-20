@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,7 +25,7 @@ public class Season {
     @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "season_id")
-    private List<Episode> episodes;
+    private List<Episode> episodes = new ArrayList<>();
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @CollectionTable(name = "series_id")

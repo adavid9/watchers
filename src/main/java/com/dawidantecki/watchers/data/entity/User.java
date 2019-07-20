@@ -24,6 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Transient
+    @EqualsAndHashCode.Exclude
     private String confirmPassword;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},

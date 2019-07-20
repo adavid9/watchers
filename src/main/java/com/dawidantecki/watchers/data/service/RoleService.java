@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -45,6 +46,16 @@ public class RoleService {
 
     public Role findByName(RoleName name) {
         return roleRepository.findByRoleName(name);
+    }
+
+    public List<Role> findAll() {
+        return roleRepository.findAll();
+    }
+
+    public void deleteRole(Role role) {
+        if (role == null)
+            return;
+        roleRepository.delete(role);
     }
 
     public void deleteRole(long id) {

@@ -23,7 +23,19 @@ public class MovieService {
     public void addMovie(Movie movie) {
         if (movie == null)
             return;
-        movieRepository.save(movie);
+        Movie m = movieRepository.findByTitle(movie.getTitle());
+        if (m != null) {
+            m.setTitle(movie.getTitle());
+            m.setDescription(movie.getDescription());
+            m.setRelease_date(movie.getRelease_date());
+            m.setCountry(movie.getCountry());
+            m.setCategory(movie.getCategory());
+            m.setRate(movie.getRate());
+            m.setUsers(movie.getUsers());
+            movieRepository.save(m);
+        } else {
+            movieRepository.save(movie);
+        }
     }
 
     public void addMovie(Collection<Movie> movies) {
@@ -67,5 +79,13 @@ public class MovieService {
         if (movie == null)
             return;
         movieRepository.delete(movie);
+    }
+
+    public void deleteMovie(Collection<Movie> movies) {
+        if (movies.size() > 0)
+            movies.forEach(movie -> {
+                if (movie != null)
+                    deleteMovie(movie.getId());
+            });
     }
 }

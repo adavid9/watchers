@@ -1,5 +1,6 @@
 package com.dawidantecki.watchers.data.service;
 
+import com.dawidantecki.watchers.data.entity.Role;
 import com.dawidantecki.watchers.data.entity.User;
 import com.dawidantecki.watchers.data.repository.UserRepository;
 import com.dawidantecki.watchers.exceptions.UserAlreadyExistsException;
@@ -97,5 +98,13 @@ public class UserService {
 
     public void deleteUser(User user) {
         deleteUser(user.getId());
+    }
+
+    public void deleteUser(Collection<User> users) {
+        if (users.size() > 0)
+            users.forEach(x -> {
+                if (x != null)
+                    deleteUser(x.getId());
+            });
     }
 }

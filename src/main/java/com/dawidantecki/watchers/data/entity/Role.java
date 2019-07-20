@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.data.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 
 @Data
 @ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "roles")
 public class Role {

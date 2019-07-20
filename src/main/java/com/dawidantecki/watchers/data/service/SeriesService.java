@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -35,29 +34,23 @@ public class SeriesService {
     }
 
     public void addSeries(Series series) {
-        if (series != null)
+        if (series == null)
+            return;
+        Series s = findByTitle(series.getTitle());
+        if (s != null) {
+            s.setTitle(series.getTitle());
+            s.setDescription(series.getDescription());
+            s.setCountry(series.getCountry());
+            s.setDirector(series.getDirector());
+            s.setRelease_date(series.getRelease_date());
+            s.setSeasons(series.getSeasons());
+            seriesRepository.save(s);
+        } else {
             seriesRepository.save(series);
-    }
-
-    public void addSeries(Collection<Series> series) {
-        if (series.size() > 0)
-            series.forEach(x -> {
-                if (x != null)
-                    addSeries(x);
-            });
-    }
-
-    public void deleteSeries(long id) {
-        Series series = findById(id);
-        deleteOperation(series);
+        }
     }
 
     public void deleteSeries(Series series) {
-        deleteOperation(series);
-    }
-
-    public void deleteSeries(String title) {
-        Series series = findByTitle(title);
         deleteOperation(series);
     }
 
