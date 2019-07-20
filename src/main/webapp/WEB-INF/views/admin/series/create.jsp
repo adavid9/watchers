@@ -1,3 +1,4 @@
+<%@ page import="com.dawidantecki.watchers.data.entity.enums.Category" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="${pageContext.request.contextPath}" var="contextPath"/>
 <%--
@@ -30,6 +31,14 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea name="description" style="resize:none" id="description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" id="category" class="form-control">
+                <c:forEach items="${Category.values()}" var="category">
+                    <option><c:out value="${category.type}"/></option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
             <label for="country">Country</label>

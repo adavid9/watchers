@@ -37,7 +37,7 @@
                 <td><c:out value="${movie.description}"/></td>
                 <td><c:out value="${movie.release_date}"/></td>
                 <td><c:out value="${movie.country}"/></td>
-                <td><c:out value="${movie.category}"/></td>
+                <td><c:out value="${movie.category.type}"/></td>
                 <td><c:out value="${movie.rate}"/></td>
             </tr>
         </c:forEach>

@@ -1,6 +1,7 @@
 package com.dawidantecki.watchers.controller.admin;
 
 import com.dawidantecki.watchers.data.entity.Movie;
+import com.dawidantecki.watchers.data.entity.enums.Category;
 import com.dawidantecki.watchers.data.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,8 @@ public class MovieController {
             ratio = Double.parseDouble(rate);
         }
 
-        Movie movie = new Movie(title, description, release_date, country, category, ratio);
+        Category movieCategory = Category.valueOf(category.toUpperCase());
+        Movie movie = new Movie(title, description, release_date, country, movieCategory, ratio);
 
         movieService.addMovie(movie);
         model.addAttribute("msgSuccess", "Movie created successfully.");
@@ -132,7 +134,7 @@ public class MovieController {
         movie.setDescription(description);
         movie.setRelease_date(release_date);
         movie.setCountry(country);
-        movie.setCategory(category);
+        movie.setCategory(Category.valueOf(category.toUpperCase()));
         movie.setRate(Double.parseDouble(rate));
 
         movieService.addMovie(movie);

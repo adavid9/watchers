@@ -1,5 +1,6 @@
 package com.dawidantecki.watchers.data.entity;
 
+import com.dawidantecki.watchers.data.entity.enums.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,7 +28,8 @@ public class Movie {
     @Column(name = "country")
     private String country;
     @Column(name = "category")
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     @Column(name = "rate")
     private double rate;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -45,7 +47,7 @@ public class Movie {
         this.title = title;
     }
 
-    public Movie(String title, String description, String release_date, String country, String category, double rate) {
+    public Movie(String title, String description, String release_date, String country, Category category, double rate) {
         this.title = title;
         this.description = description;
         this.release_date = release_date;

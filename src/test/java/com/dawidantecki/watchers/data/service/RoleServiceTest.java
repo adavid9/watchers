@@ -2,7 +2,7 @@ package com.dawidantecki.watchers.data.service;
 
 import com.dawidantecki.watchers.configuration.DatabaseConnectionTest;
 import com.dawidantecki.watchers.data.entity.Role;
-import com.dawidantecki.watchers.data.entity.RoleName;
+import com.dawidantecki.watchers.data.entity.enums.RoleName;
 import com.dawidantecki.watchers.data.repository.RoleRepository;
 import com.dawidantecki.watchers.exceptions.RoleAlreadyExistsException;
 import org.junit.After;

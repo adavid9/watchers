@@ -1,7 +1,7 @@
 package com.dawidantecki.watchers.data.repository;
 
 import com.dawidantecki.watchers.data.entity.Role;
-import com.dawidantecki.watchers.data.entity.RoleName;
+import com.dawidantecki.watchers.data.entity.enums.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

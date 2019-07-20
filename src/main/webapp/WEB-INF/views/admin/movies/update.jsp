@@ -39,7 +39,7 @@
                 <td><c:out value="${movie.title}"/></td>
                 <td><c:out value="${movie.description}"/></td>
                 <td><c:out value="${movie.country}"/></td>
-                <td><c:out value="${movie.category}"/></td>
+                <td><c:out value="${movie.category.type}"/></td>
                 <td><c:out value="${movie.rate}"/></td>
                 <td>
                     <form action="${contextPath}/admin/updateMovie/${movie.id}" method="POST">

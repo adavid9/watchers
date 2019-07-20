@@ -39,6 +39,7 @@
             <th scope="col">Id</th>
             <th scope="col">Title</th>
             <th scope="col">Description</th>
+            <th scope="col">Category</th>
             <th scope="col">Country</th>
             <th scope="col">Director</th>
             <th scope="col">-</th>
@@ -50,10 +51,11 @@
                 <td><c:out value="${series.id}"/></td>
                 <td><c:out value="${series.title}"/></td>
                 <td><c:out value="${series.description}"/></td>
+                <td><c:out value="${series.category.type}"/></td>
                 <td><c:out value="${series.country}"/></td>
                 <td><c:out value="${series.director}"/></td>
                 <td>
-                    <form action="${contextPath}/admin/deleteSeries/${s.id}" method="POST">
+                    <form action="${contextPath}/admin/deleteSeries/${series.id}" method="POST">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>

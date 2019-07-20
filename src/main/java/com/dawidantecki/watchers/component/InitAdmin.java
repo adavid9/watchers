@@ -1,8 +1,8 @@
 package com.dawidantecki.watchers.component;
 
 import com.dawidantecki.watchers.data.entity.Role;
-import com.dawidantecki.watchers.data.entity.RoleName;
 import com.dawidantecki.watchers.data.entity.User;
+import com.dawidantecki.watchers.data.entity.enums.RoleName;
 import com.dawidantecki.watchers.data.service.RoleService;
 import com.dawidantecki.watchers.data.service.UserService;
 import org.slf4j.Logger;

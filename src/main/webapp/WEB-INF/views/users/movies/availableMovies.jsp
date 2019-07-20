@@ -70,11 +70,11 @@
                     </td>
                     <td>
                         <c:choose>
-                            <c:when test="${movie.category.equals('')}">
+                            <c:when test="${movie.category.type.equals('')}">
                                 -
                             </c:when>
                             <c:otherwise>
-                                <c:out value="${movie.category}"/>
+                                <c:out value="${movie.category.type}"/>
                             </c:otherwise>
                         </c:choose>
                     </td>

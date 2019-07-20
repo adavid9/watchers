@@ -1,3 +1,4 @@
+<%@ page import="com.dawidantecki.watchers.data.entity.enums.Category" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="${pageContext.request.contextPath}" var="contextPath"/>
 <%--
@@ -40,12 +41,16 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text" name="country" id="country" class="form-control"/>
+            <label for="category">Category</label>
+            <select name="category" id="category" class="form-control">
+                <c:forEach items="${Category.values()}" var="category">
+                    <option><c:out value="${category.type}"/></option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" name="category" class="form-control" id="category"/>
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country" class="form-control"/>
         </div>
         <div class="form-group">
             <label for="rate">Rate</label>

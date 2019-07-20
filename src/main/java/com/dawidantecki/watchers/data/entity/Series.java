@@ -1,5 +1,6 @@
 package com.dawidantecki.watchers.data.entity;
 
+import com.dawidantecki.watchers.data.entity.enums.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,6 +23,9 @@ public class Series {
     private String title;
     @Column(name = "description")
     private String description;
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
     @Column(name = "country")
     private String country;
     @Column(name = "director")
@@ -38,9 +42,10 @@ public class Series {
 
     }
 
-    public Series(String title, String description, String country, String director) {
+    public Series(String title, String description, Category category, String country, String director) {
         this.title = title;
         this.description = description;
+        this.category = category;
         this.country = country;
         this.director = director;
     }

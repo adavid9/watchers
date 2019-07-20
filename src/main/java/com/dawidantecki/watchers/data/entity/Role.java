@@ -1,5 +1,6 @@
 package com.dawidantecki.watchers.data.entity;
 
+import com.dawidantecki.watchers.data.entity.enums.RoleName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

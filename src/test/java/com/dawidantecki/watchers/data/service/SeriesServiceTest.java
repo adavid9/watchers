@@ -82,8 +82,8 @@ public class SeriesServiceTest extends DatabaseConnectionTest {
 
     @Test
     public void should_be_only_one() {
-        series.add(new Series("Mr Robot", "", "", ""));
-        series.add(new Series("Mr Robot", "", "", ""));
+        series.add(new Series("Mr Robot", "", null, "", ""));
+        series.add(new Series("Mr Robot", "", null, "", ""));
 
         series.forEach(s -> seriesService.addSeries(s));
         List<Series> seriesList = seriesService.findAll();
@@ -105,14 +105,14 @@ public class SeriesServiceTest extends DatabaseConnectionTest {
     private ArrayList<Series> seriesList() {
         ArrayList<Series> series = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            series.add(new Series("Title" + i, "", "", ""));
+            series.add(new Series("Title" + i, "", null, "", ""));
         }
 
         return series;
     }
 
     private Series seriesWithSeasons() {
-        Series series = new Series("Title", "", "", "");
+        Series series = new Series("Title", "", null, "", "");
         series.getSeasons().add(new Season("Season"));
 
         return series;

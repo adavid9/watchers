@@ -3,6 +3,7 @@ package com.dawidantecki.watchers.controller.admin;
 import com.dawidantecki.watchers.data.entity.Episode;
 import com.dawidantecki.watchers.data.entity.Season;
 import com.dawidantecki.watchers.data.entity.Series;
+import com.dawidantecki.watchers.data.entity.enums.Category;
 import com.dawidantecki.watchers.data.service.SeriesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,9 @@ public class SeriesController {
 
     @RequestMapping(value = "/addSeries", method = RequestMethod.POST)
     public String create(@RequestParam("title") String title, @RequestParam("description") String description,
-                         @RequestParam("country") String country, @RequestParam("director") String director,
-                         @RequestParam("release_date") String release_date, Model model) {
+                         @RequestParam("category") String category, @RequestParam("country") String country,
+                         @RequestParam("director") String director, @RequestParam("release_date") String release_date,
+                         Model model) {
 
         Series series = seriesService.findByTitle(title);
         if (series != null) {
@@ -45,7 +47,8 @@ public class SeriesController {
             return "admin/series/create";
         }
 
-        Series newSeries = new Series(title, description, country, director);
+        Category seriesCategory = Category.valueOf(category.toUpperCase());
+        Series newSeries = new Series(title, description, seriesCategory, country, director);
         if (release_date != null)
             newSeries.setRelease_date(release_date);
 
@@ -140,9 +143,9 @@ public class SeriesController {
 
     @RequestMapping(value = "/updateSeries", method = RequestMethod.POST)
     public String update(@RequestParam("id") String id, @RequestParam("title") String title,
-                         @RequestParam("description") String description, @RequestParam("country") String country,
-                         @RequestParam("director") String director, @RequestParam("release_date") String release_date,
-                         Model model) {
+                         @RequestParam("description") String description, @RequestParam("category") String category,
+                         @RequestParam("country") String country, @RequestParam("director") String director,
+                         @RequestParam("release_date") String release_date, Model model) {
         Series series = seriesService.findById(Long.parseLong(id));
         if (series == null) {
             model.addAttribute("msgError", "Series not found");
@@ -151,6 +154,7 @@ public class SeriesController {
 
         series.setTitle(title);
         series.setDescription(description);
+        series.setCategory(Category.valueOf(category.toUpperCase()));
         series.setCountry(country);
         series.setDirector(director);
         series.setRelease_date(release_date);
