@@ -1,9 +1,7 @@
 package com.dawidantecki.watchers.data.service;
 
-import com.dawidantecki.watchers.data.entity.Role;
 import com.dawidantecki.watchers.data.entity.User;
 import com.dawidantecki.watchers.data.repository.UserRepository;
-import com.dawidantecki.watchers.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
