@@ -1,0 +1,13 @@
+language: java
+
+addons:
+  hosts:
+    - db
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS watchers;'
+  - mysql -e "CREATE USER 'watchers_admin'@'localhost' IDENTIFIED BY 'watchers_admin';"
+  - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'watchers_admin'@'localhost';"
