@@ -35,18 +35,10 @@
             <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"/>
         </div>
         <button type="submit" class="btn btn-success">Save</button>
-        <a href="${contextPath}/admin/adminStart">
-            <button type="button" class="btn btn-default">Back</button>
-        </a>
     </form>
     <c:if test="${msgError != null}">
         <div class="alert alert-danger">
             <c:out value="${msgError}"></c:out>
-        </div>
-    </c:if>
-    <c:if test="${msgSuccess != null}">
-        <div class="alert alert-success">
-            <c:out value="${msgSuccess}"></c:out>
         </div>
     </c:if>
 </div>

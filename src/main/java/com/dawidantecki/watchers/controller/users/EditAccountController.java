@@ -1,5 +1,7 @@
 package com.dawidantecki.watchers.controller.users;
 
+import javax.servlet.http.HttpSession;
+
 import com.dawidantecki.watchers.data.entity.User;
 import com.dawidantecki.watchers.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class EditAccountController {
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(@RequestParam("id") String id, @RequestParam("password") String password,
-                                 @RequestParam("confirmPassword") String confirmPassword, Model model) {
+                                 @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session) {
         User user = userService.findById(Long.parseLong(id));
         if (user == null) {
             model.addAttribute("msgError", "User not found.");
@@ -65,8 +67,9 @@ public class EditAccountController {
         user.setPassword(password);
 
         userService.addUser(user);
-        model.addAttribute("msgSuccess", "Password successfully changed!");
-
-        return "users/account/changePassword";
+        // whenever the user change password, redirect him to the login page
+		// to force him to log in with the new password.
+		session.invalidate();
+		return "redirect:/login";
     }
 }
