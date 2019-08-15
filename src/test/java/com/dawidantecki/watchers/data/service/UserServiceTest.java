@@ -130,8 +130,10 @@ public class UserServiceTest extends DatabaseConnectionTest {
 
     @Test
     public void should_be_only_one() {
-        users.add(new User("user", "", "", ""));
-        users.add(new User("user", "", "", ""));
+        users.add(new User("user", "", "", "",
+				"", ""));
+        users.add(new User("user", "", "", "",
+				"", ""));
 
         userService.addUser(users);
 
@@ -151,7 +153,8 @@ public class UserServiceTest extends DatabaseConnectionTest {
         ArrayList<User> users = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            users.add(new User("username" + i, "email" + i + "@email.com", "password", "password"));
+            users.add(new User("username" + i, "email" + i + "@email.com", "", "",
+					"password", "password"));
         }
 
         return users;

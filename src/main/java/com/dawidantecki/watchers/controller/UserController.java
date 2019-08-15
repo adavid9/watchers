@@ -35,6 +35,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@RequestParam("username") String username, @RequestParam("email") String email,
+                               @RequestParam("question") String question, @RequestParam("answer") String answer,
                                @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
                                @RequestParam("roleName") String roleName, Model model) {
 
@@ -54,21 +55,25 @@ public class UserController {
             return "registration";
         }
 
-        Role role = null;
+        if (answer.equals("")) {
+        	model.addAttribute("msgError", "You need to specify an answer.");
+        	return "registration";
+		}
+
+        Role role;
         if (roleName != null) {
             role = roleService.findByName(RoleName.valueOf(roleName.toUpperCase()));
-        }
-
-        if (role == null) {
-            role = new Role(RoleName.valueOf(roleName.toUpperCase()));
-        }
+        } else {
+			role = new Role(RoleName.valueOf(roleName.toUpperCase()));
+		}
 
         if (!CustomFieldValidator.isEmailValid(email)) {
             model.addAttribute("msgError", "Email is invalid");
             return "registration";
         }
 
-        User user = new User(username, email, password, confirmPassword);
+        User user = new User(username, email, question, answer,
+				password, confirmPassword);
         user.getRoles().add(role);
 
         userService.addUser(user);

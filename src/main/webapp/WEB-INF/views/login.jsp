@@ -37,8 +37,8 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-primary" type="submit">Log in</button>
-            <button class="btn btn-default"><a href="${pageContext.request.contextPath}/registration">Register</a>
-            </button>
+            <button class="btn btn-default"><a href="${pageContext.request.contextPath}/registration">Register</a></button>
+            <button class="btn btn-default"><a href="${pageContext.request.contextPath}/forgot-password">Forgot password?</a></button>
         </div>
         <c:if test="${msgError != null}">
             <div class="alert alert-info">

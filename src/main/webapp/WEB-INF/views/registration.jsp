@@ -37,6 +37,22 @@
             <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword"
                    id="confirmPassword"/>
         </div>
+        <div class="form-group">
+            <label for="question">Question</label>
+            <select name="question" id="question" class="form-control">
+                <option>Your best friends name?</option>
+                <option>City where do you born?</option>
+                <option>Name of your ex girlfriend?</option>
+                <option>Your favorite food type?</option>
+                <option>Where have you been when you were 13?</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="answer">
+                <input type="text" class="form-control" placeholder="Answer" name="answer"
+                id="answer" />
+            </label>
+        </div>
         <div class="checkbox">
             <label>
                 <input type="checkbox" name="roleName" value="ROLE_USER" checked="checked"
