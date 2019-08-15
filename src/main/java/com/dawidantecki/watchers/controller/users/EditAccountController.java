@@ -24,15 +24,17 @@ public class EditAccountController {
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
     public String changePassword(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        // lookup for user
-        User user = userService.findByUsername(username);
-        if (user != null) {
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("msgError", "User not found");
-        }
+    	if (!model.containsAttribute("user")) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+			// lookup for user
+			User user = userService.findByUsername(username);
+			if (user != null) {
+				model.addAttribute("user", user);
+			} else {
+				model.addAttribute("msgError", "User not found");
+			}
+		}
 
         return "users/account/changePassword";
     }

@@ -36,24 +36,8 @@ public class ForgotPasswordController {
 			return "users/account/forgot-password";
 		} else {
 			model.addAttribute("user", user);
-			return "users/account/new-password";
+			return "users/account/changePassword";
 		}
-	}
-
-	@RequestMapping(value = "/new-password", method = RequestMethod.POST)
-	public String changePassword(@RequestParam("id") String id, @RequestParam("password") String password,
-			@RequestParam("confirmPassword") String confirmPassword, Model model) {
-		User user = userService.findById(Long.parseLong(id));
-
-		// check if password and confirmPassword are same
-		if (!password.equals(confirmPassword)) {
-			model.addAttribute("msgError", "The password cannot be different than confirmPassword.");
-			return "users/account/new-password";
-		}
-
-		user.setPassword(password);
-		userService.addUser(user);
-		return "redirect:/login";
 	}
 
 	private boolean validateQuestionAnswer(User user, String question, String answer) {
