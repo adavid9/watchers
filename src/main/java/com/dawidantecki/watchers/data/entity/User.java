@@ -57,16 +57,22 @@ public class User {
     private Set<Movie> user_movies = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	@JoinTable(name = "user_series", joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "series_id"))
     private List<Series> userSeries = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	@JoinTable(name = "user_seasons", joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "season_id"))
 	private List<Season> userSeasons = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	@JoinTable(name = "user_episodes", joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "episode_id"))
 	private List<Episode> userEpisodes = new ArrayList<>();
