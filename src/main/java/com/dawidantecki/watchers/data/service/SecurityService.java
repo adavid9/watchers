@@ -26,12 +26,7 @@ public class SecurityService {
     private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
     public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            return ((UserDetails) userDetails).getUsername();
-        }
-
-        return null;
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public void autoLogin(String username, String password) {

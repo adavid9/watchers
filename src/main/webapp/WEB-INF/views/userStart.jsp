@@ -33,6 +33,15 @@
             <li><a href="${contextPath}/availableMovies">Available Movies</a></li>
             <li><a href="${contextPath}/topMovies">Top 10 Movies</a></li>
         </ul>
+        <h4>Movies:</h4>
+        <ul>
+            <li><a href="${contextPath}/user/series-list">Available Series</a></li>
+            <li><a href="${contextPath}/user/seasons-list">Available Seasons</a></li>
+            <li><a href="${contextPath}/user/episodes-list">Available Episodes</a></li>
+            <li><a href="${contextPath}/user/seasons">User Seasons</a></li>
+            <li><a href="${contextPath}/user/series">User Series</a></li>
+            <li><a href="${contextPath}/user/episodes">User Episodes</a></li>
+        </ul>
         <br><br>
         <a href="${contextPath}/welcome">
             <button type="button" class="btn btn-default">

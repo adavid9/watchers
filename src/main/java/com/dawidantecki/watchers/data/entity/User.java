@@ -1,12 +1,26 @@
 package com.dawidantecki.watchers.data.entity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @ToString
@@ -41,6 +55,21 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Movie> user_movies = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_series", joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "series_id"))
+    private List<Series> userSeries = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_seasons", joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "season_id"))
+	private List<Season> userSeasons = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_episodes", joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "episode_id"))
+	private List<Episode> userEpisodes = new ArrayList<>();
 
     public User() {
 
