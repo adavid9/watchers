@@ -18,12 +18,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "users")
 public class User {
