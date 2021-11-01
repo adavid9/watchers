@@ -5,18 +5,16 @@ import com.dawidantecki.watchers.data.repository.SeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class SeriesService {
 
-    private SeriesRepository seriesRepository;
-    private SeasonService seasonService;
+    private final SeriesRepository seriesRepository;
+    private final SeasonService seasonService;
 
     @Autowired
-    public SeriesService(SeriesRepository seriesRepository, SeasonService seasonService) {
+    public SeriesService(final SeriesRepository seriesRepository, final SeasonService seasonService) {
         this.seriesRepository = seriesRepository;
         this.seasonService = seasonService;
     }
@@ -58,7 +56,7 @@ public class SeriesService {
         if (series == null)
             return;
 
-        series.getSeasons().forEach(x -> seasonService.deleteSeason(x));
+        series.getSeasons().forEach(seasonService::deleteSeason);
         seriesRepository.delete(series);
     }
 }
