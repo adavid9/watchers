@@ -15,10 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public MyUserDetailsService(UserService userService) {

@@ -1,7 +1,6 @@
 package com.dawidantecki.watchers.data.entity;
 
 import com.dawidantecki.watchers.data.entity.enums.RoleName;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +25,7 @@ public class Role {
     @Column(name = "name")
     private RoleName roleName;
 
-    private Role() {
+    public Role() {
     }
 
     public Role(RoleName roleName) {
