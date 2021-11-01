@@ -33,7 +33,9 @@ public class UserServiceTest {
     @Test
     public void when_find_by_id_then_user_should_be_returned() {
         final Optional<User> expected = Optional.of(
-                new User("username")
+                User.builder()
+                        .username("username")
+                        .build()
         );
         when(userRepository.findById(anyLong())).thenReturn(expected);
 
@@ -44,7 +46,9 @@ public class UserServiceTest {
 
     @Test
     public void when_find_by_username_then_user_should_be_returned() {
-        final User expected = new User("username");
+        final User expected = User.builder()
+                .username("username")
+                .build();
         when(userRepository.findByUsername(anyString())).thenReturn(expected);
 
         final User actual = userService.findByUsername("username");
@@ -55,8 +59,12 @@ public class UserServiceTest {
     @Test
     public void when_find_all_then_users_should_be_returned() {
         final List<User> expected = Lists.newArrayList(
-                new User("username_one"),
-                new User("username_two")
+                User.builder()
+                        .username("username_1")
+                        .build(),
+                User.builder()
+                        .username("username_2")
+                        .build()
         );
         when(userRepository.findAll()).thenReturn(expected);
 

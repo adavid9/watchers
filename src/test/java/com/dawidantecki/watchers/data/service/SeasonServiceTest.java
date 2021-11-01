@@ -32,7 +32,10 @@ public class SeasonServiceTest {
 
     @Test
     public void when_find_by_id_then_season_should_be_returned() {
-        final Optional<Season> expected = Optional.of(new Season("Season"));
+        final Optional<Season> expected = Optional.of(Season.builder()
+                .name("Season")
+                .build()
+        );
         when(seasonRepository.findById(anyLong())).thenReturn(expected);
 
         final Season actual = seasonService.findById(1L);
@@ -42,7 +45,9 @@ public class SeasonServiceTest {
 
     @Test
     public void when_find_by_name_then_season_should_be_returned() {
-        final Season expected = new Season("Season");
+        final Season expected = Season.builder()
+                .name("Season")
+                .build();
         when(seasonRepository.findByName(anyString())).thenReturn(expected);
 
         final Season actual = seasonService.findByName("Season");
@@ -53,8 +58,12 @@ public class SeasonServiceTest {
     @Test
     public void when_find_all_then_seasons_should_be_returned() {
         final List<Season> expected = Lists.newArrayList(
-                new Season("Season_1"),
-                new Season("Season_2")
+                Season.builder()
+                        .name("Season_1")
+                        .build(),
+                Season.builder()
+                        .name("Season_2")
+                        .build()
         );
         when(seasonRepository.findAll()).thenReturn(expected);
 
@@ -65,7 +74,9 @@ public class SeasonServiceTest {
 
     @Test
     public void when_add_season_then_season_should_be_saved() {
-        final Season season = new Season("Season");
+        final Season season = Season.builder()
+                .name("Season")
+                .build();
 
         seasonService.addSeason(season);
 
@@ -74,7 +85,9 @@ public class SeasonServiceTest {
 
     @Test
     public void when_delete_season_by_id_then_season_with_all_episodes_should_be_deleted() {
-        final Season season = new Season("Season");
+        final Season season = Season.builder()
+                .name("Season")
+                .build();
         final Episode episode = mock(Episode.class);
         season.setEpisodes(Collections.singletonList(episode));
         when(episode.getId()).thenReturn(1L);

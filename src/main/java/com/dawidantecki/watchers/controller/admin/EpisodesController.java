@@ -58,7 +58,12 @@ public class EpisodesController {
             return "admin/episodes/create";
         }
 
-        Episode episode = new Episode(title, description, release_date, season);
+        Episode episode = Episode.builder()
+                .title(title)
+                .description(description)
+                .release_date(release_date)
+                .season(season)
+                .build();
         episodeService.addEpisode(episode);
         model.addAttribute("msgSuccess", "Episode successfully created");
 

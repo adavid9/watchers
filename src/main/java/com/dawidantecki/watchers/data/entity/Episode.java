@@ -9,15 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-@ToString
+@ToString(exclude = {"season"})
 @Entity
 @Table(name = "episode")
 public class Episode {
@@ -32,22 +31,5 @@ public class Episode {
     @Column(name = "release_date")
     private String release_date;
     @ManyToOne(fetch = FetchType.EAGER)
-    @ToString.Exclude
     private Season season;
-
-    public Episode() {
-
-    }
-
-    public Episode(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
-    public Episode(String title, String description, String release_date, Season season) {
-        this.title = title;
-        this.description = description;
-        this.release_date = release_date;
-        this.season = season;
-    }
 }

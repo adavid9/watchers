@@ -28,7 +28,10 @@ public class EpisodeServiceTest {
 
     @Test
     public void when_find_by_id_then_episode_should_be_returned() {
-        final Optional<Episode> expected = Optional.of(new Episode("Episode", "Episode"));
+        final Optional<Episode> expected = Optional.of(Episode.builder()
+                .title("Episode")
+                .build()
+        );
         when(episodeRepository.findById(anyLong())).thenReturn(expected);
 
         final Episode actual = episodeService.findById(1L);
@@ -38,7 +41,9 @@ public class EpisodeServiceTest {
 
     @Test
     public void when_find_by_title_then_episode_should_be_returned() {
-        final Episode expected = new Episode("Episode", "Episode");
+        final Episode expected = Episode.builder()
+                .title("Episode")
+                .build();
         when(episodeRepository.findByTitle(anyString())).thenReturn(expected);
 
         final Episode actual = episodeService.findByTitle("Episode");
@@ -49,8 +54,12 @@ public class EpisodeServiceTest {
     @Test
     public void when_find_all_then_episodes_should_be_returned() {
         final List<Episode> expected = Lists.newArrayList(
-                new Episode("Episode_1", "Episode_1"),
-                new Episode("Episode_2", "Episode_2")
+                Episode.builder()
+                        .title("Episode_1")
+                        .build(),
+                Episode.builder()
+                        .title("Episode_2")
+                        .build()
         );
         when(episodeRepository.findAll()).thenReturn(expected);
 
@@ -61,7 +70,9 @@ public class EpisodeServiceTest {
 
     @Test
     public void when_add_episode_then_episode_should_be_saved() {
-        final Episode episode = new Episode("Episode", "Episode");
+        final Episode episode = Episode.builder()
+                .title("Episode")
+                .build();
 
         episodeService.addEpisode(episode);
 
@@ -70,7 +81,9 @@ public class EpisodeServiceTest {
 
     @Test
     public void when_delete_episode_by_id_then_episode_should_be_deleted() {
-        final Episode episode = new Episode("Episode", "Episode");
+        final Episode episode = Episode.builder()
+                .title("Episode")
+                .build();
         when(episodeRepository.findById(anyLong())).thenReturn(Optional.of(episode));
 
         episodeService.deleteEpisodeById(1L);

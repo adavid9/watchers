@@ -48,7 +48,13 @@ public class SeriesController {
         }
 
         Category seriesCategory = Category.valueOf(category.toUpperCase());
-        Series newSeries = new Series(title, description, seriesCategory, country, director);
+        Series newSeries =  Series.builder()
+                .title(title)
+                .description(description)
+                .category(seriesCategory)
+                .country(country)
+                .director(director)
+                .build();
         if (release_date != null)
             newSeries.setRelease_date(release_date);
 

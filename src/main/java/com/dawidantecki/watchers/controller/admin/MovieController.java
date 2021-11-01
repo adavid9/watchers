@@ -49,7 +49,14 @@ public class MovieController {
         }
 
         Category movieCategory = Category.valueOf(category.toUpperCase());
-        Movie movie = new Movie(title, description, release_date, country, movieCategory, ratio);
+        Movie movie = Movie.builder()
+                .title(title)
+                .description(description)
+                .release_date(release_date)
+                .country(country)
+                .category(movieCategory)
+                .rate(ratio)
+                .build();
 
         movieService.addMovie(movie);
         model.addAttribute("msgSuccess", "Movie created successfully.");

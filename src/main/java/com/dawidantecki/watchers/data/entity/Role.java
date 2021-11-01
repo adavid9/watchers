@@ -1,16 +1,15 @@
 package com.dawidantecki.watchers.data.entity;
 
 import com.dawidantecki.watchers.data.entity.enums.RoleName;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity
@@ -24,11 +23,4 @@ public class Role {
     @NaturalId
     @Column(name = "name")
     private RoleName roleName;
-
-    public Role() {
-    }
-
-    public Role(RoleName roleName) {
-        this.roleName = roleName;
-    }
 }

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+
 @Controller
 public class UserController {
 
@@ -37,7 +41,7 @@ public class UserController {
     public String registration(@RequestParam("username") String username, @RequestParam("email") String email,
                                @RequestParam("question") String question, @RequestParam("answer") String answer,
                                @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
-                               @RequestParam("roleName") String roleName, Model model) {
+                               Model model) {
 
         User foundUser = userService.findByUsername(username);
         if (foundUser != null) {
@@ -60,21 +64,22 @@ public class UserController {
         	return "registration";
 		}
 
-        Role role;
-        if (roleName != null) {
-            role = roleService.findByName(RoleName.valueOf(roleName.toUpperCase()));
-        } else {
-			role = new Role(RoleName.valueOf(roleName.toUpperCase()));
-		}
+        Role role = roleService.findByName(RoleName.ROLE_USER);
 
         if (!CustomFieldValidator.isEmailValid(email)) {
             model.addAttribute("msgError", "Email is invalid");
             return "registration";
         }
 
-        User user = new User(username, email, question, answer,
-				password, confirmPassword);
-        user.getRoles().add(role);
+        User user = User.builder()
+                .username(username)
+                .email(email)
+                .question(question)
+                .answer(answer)
+                .password(password)
+                .confirmPassword(confirmPassword)
+                .roles(new HashSet<>(Collections.singletonList(role)))
+                .build();
 
         userService.addUser(user);
         securityService.autoLogin(username, password);

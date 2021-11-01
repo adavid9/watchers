@@ -17,16 +17,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.dawidantecki.watchers.data.entity.enums.Category;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"seasons"})
+@EqualsAndHashCode(exclude = {"seasons"})
 @Entity
-@EqualsAndHashCode
 @Table(name = "series")
 public class Series {
 
@@ -48,20 +47,6 @@ public class Series {
     private String release_date;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "series_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     private List<Season> seasons = new LinkedList<>();
-
-    public Series() {
-
-    }
-
-    public Series(String title, String description, Category category, String country, String director) {
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.country = country;
-        this.director = director;
-    }
 }
 

@@ -30,7 +30,10 @@ public class RoleServiceTest {
 
     @Test
     public void when_find_by_id_then_role_should_be_returned() {
-        final Optional<Role> expected = Optional.of(new Role(RoleName.ROLE_ADMIN));
+        final Optional<Role> expected = Optional.of(Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build()
+        );
         when(roleRepository.findById(anyLong())).thenReturn(expected);
 
         final Role actual = roleService.findById(1L);
@@ -40,7 +43,9 @@ public class RoleServiceTest {
 
     @Test
     public void when_find_by_name_then_role_should_be_returned() {
-        final Role expected = new Role(RoleName.ROLE_ADMIN);
+        final Role expected = Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build();
         when(roleRepository.findByRoleName(any(RoleName.class))).thenReturn(expected);
 
         final Role actual = roleService.findByName(RoleName.ROLE_ADMIN);
@@ -51,8 +56,12 @@ public class RoleServiceTest {
     @Test
     public void when_find_all_then_roles_should_be_returned() {
         final List<Role> expected = Lists.newArrayList(
-                new Role(RoleName.ROLE_ADMIN),
-                new Role(RoleName.ROLE_USER)
+                Role.builder()
+                        .roleName(RoleName.ROLE_ADMIN)
+                        .build(),
+                Role.builder()
+                        .roleName(RoleName.ROLE_USER)
+                        .build()
         );
         when(roleRepository.findAll()).thenReturn(expected);
 
@@ -63,7 +72,9 @@ public class RoleServiceTest {
 
     @Test
     public void when_add_role_then_role_should_be_saved() {
-        final Role role = new Role(RoleName.ROLE_ADMIN);
+        final Role role = Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build();
 
         roleService.addRole(role);
 
@@ -72,7 +83,9 @@ public class RoleServiceTest {
 
     @Test
     public void when_add_role_and_role_exists_then_exception_should_be_thrown() {
-        final Role role = new Role(RoleName.ROLE_ADMIN);
+        final Role role = Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build();
         when(roleRepository.findByRoleName(any(RoleName.class))).thenReturn(role);
 
         final RoleAlreadyExistsException roleAlreadyExistsException = assertThrows(RoleAlreadyExistsException.class, () -> roleService.addRole(role));

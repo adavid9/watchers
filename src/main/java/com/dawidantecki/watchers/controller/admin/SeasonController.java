@@ -47,7 +47,9 @@ public class SeasonController {
             return "admin/season/create";
         }
 
-        Season season = new Season(name);
+        Season season = Season.builder()
+                .name(name)
+                .build();
 
         if (release_date != null) {
             season.setRelease_date(release_date);

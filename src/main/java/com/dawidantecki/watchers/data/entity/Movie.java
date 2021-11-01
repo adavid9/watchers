@@ -1,20 +1,18 @@
 package com.dawidantecki.watchers.data.entity;
 
 import com.dawidantecki.watchers.data.entity.enums.Category;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"users"})
+@EqualsAndHashCode(exclude = {"users"})
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -38,24 +36,5 @@ public class Movie {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_movies", joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private Set<User> users = new HashSet<>();
-
-    public Movie() {
-
-    }
-
-    public Movie(String title) {
-        this.title = title;
-    }
-
-    public Movie(String title, String description, String release_date, String country, Category category, double rate) {
-        this.title = title;
-        this.description = description;
-        this.release_date = release_date;
-        this.country = country;
-        this.category = category;
-        this.rate = rate;
-    }
 }

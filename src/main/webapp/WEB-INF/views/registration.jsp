@@ -53,12 +53,6 @@
                 id="answer" />
             </label>
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="roleName" value="ROLE_USER" checked="checked"
-                       onclick="return false; /* prevents possibility to uncheck the checkbox*/"/> User Role
-            </label>
-        </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <c:if test="${msgError != null}">

@@ -16,15 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"episodes"})
+@ToString(exclude = {"episodes", "series"})
 @Entity
 @Table(name = "season")
 public class Season {
@@ -36,22 +35,10 @@ public class Season {
     private String name;
     @Column(name = "release_date")
     private String release_date;
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "season_id")
     private List<Episode> episodes = new ArrayList<>();
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @CollectionTable(name = "series_id")
     private Series series;
-
-    public Season() {
-
-    }
-
-    public Season(String name) {
-        this.name = name;
-    }
-
 }

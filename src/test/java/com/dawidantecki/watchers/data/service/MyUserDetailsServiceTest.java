@@ -16,7 +16,6 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +41,10 @@ public class MyUserDetailsServiceTest {
         final User user = mock(User.class);
         when(user.getUsername()).thenReturn("username");
         when(user.getPassword()).thenReturn("password");
-        when(user.getRoles()).thenReturn(new HashSet<>(Collections.singletonList(new Role(RoleName.ROLE_ADMIN))));
+        when(user.getRoles()).thenReturn(new HashSet<>(Collections.singletonList(Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build()))
+        );
         when(userService.findByUsername(user.getUsername())).thenReturn(user);
 
         final UserDetails userDetails = myUserDetailsService.loadUserByUsername("username");

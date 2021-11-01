@@ -28,7 +28,10 @@ public class MovieServiceTest {
 
     @Test
     public void when_find_movie_by_id_then_movie_should_be_returned() {
-        final Optional<Movie> expected = Optional.of(new Movie("Movie"));
+        final Optional<Movie> expected = Optional.of(Movie.builder()
+                .title("Movie")
+                .build()
+        );
         when(movieRepository.findById(anyLong())).thenReturn(expected);
 
         final Movie actual = movieService.findMovie(1L);
@@ -38,7 +41,9 @@ public class MovieServiceTest {
 
     @Test
     public void when_find_movie_by_title_then_movie_should_be_returned() {
-        final Movie expected = new Movie("Movie");
+        final Movie expected = Movie.builder()
+                .title("Movie")
+                .build();
         when(movieRepository.findByTitle(anyString())).thenReturn(expected);
 
         final Movie actual = movieService.findMovie("Movie");
@@ -49,8 +54,12 @@ public class MovieServiceTest {
     @Test
     public void when_find_all_movies_then_movies_should_be_returned() {
         final List<Movie> expected = Lists.newArrayList(
-                new Movie("Movie_1"),
-                new Movie("Movie_2")
+                Movie.builder()
+                        .title("Movie_1")
+                        .build(),
+                Movie.builder()
+                        .title("Movie_2")
+                        .build()
         );
         when(movieRepository.findAll()).thenReturn(expected);
 
@@ -61,7 +70,9 @@ public class MovieServiceTest {
 
     @Test
     public void when_delete_movie_then_movie_should_be_deleted() {
-        final Movie movie = new Movie("Movie");
+        final Movie movie = Movie.builder()
+                .title("Movie")
+                .build();
 
         movieService.deleteMovie(movie);
 
@@ -70,7 +81,9 @@ public class MovieServiceTest {
 
     @Test
     public void when_add_movie_then_movie_should_be_saved() {
-        final Movie movie = new Movie("Movie");
+        final Movie movie = Movie.builder()
+                .title("Movie")
+                .build();
 
         movieService.addMovie(movie);
 

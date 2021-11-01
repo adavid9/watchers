@@ -36,18 +36,26 @@ public class InitAdmin {
 
     @PostConstruct
     public void init() {
-        Role admin = new Role(RoleName.ROLE_ADMIN);
-        Role user = new Role(RoleName.ROLE_USER);
+        Role admin = Role.builder()
+                .roleName(RoleName.ROLE_ADMIN)
+                .build();
+        Role user = Role.builder()
+                .roleName(RoleName.ROLE_USER)
+                .build();
         List<Role> roles = Arrays.asList(admin, user);
         roleService.addRole(roles);
 
         // create admin user
-        User user1 = new User("watchers_admin", "watchers@email.com", null,
-				null,"admin", "admin");
-        user1.setRoles(Collections.singleton(admin));
-        userService.addUser(user1);
+        User adminUser = User.builder()
+                .username("watchers_admin")
+                .email("watchers@email.com")
+                .password("admin")
+                .confirmPassword("admin")
+                .roles(Collections.singleton(admin))
+                .build();
+        userService.addUser(adminUser);
 
         logger.info("Successfully created roles -> {}, {}", admin.getRoleName(), user.getRoleName());
-        logger.info("Successfully created user -> {}", user1.getUsername());
+        logger.info("Successfully created user -> {}", adminUser.getUsername());
     }
 }
