@@ -11,6 +11,26 @@
 - _H2 (development database)_
 - MySQL (production database)
 
+### Most important functionalities
+- Register & Logout
+- Administrator
+  - Add/Remove/Update Series
+  - Add/Remove/Update Season
+  - Add/Remove/Update Episodes
+  - Add/Remove/Update Movies
+  - Delete the account
+  - Delete the account of different user
+  - Change the password
+  - Change the password of different user
+  - View all accounts
+- User
+  - Add Movies from the available movies
+  - Add Series from the available series
+  - Add Seasons from the available seasons
+  - Add Episodes from the available episodes
+  - Delete the account
+  - Change the password
+
 #### Configuration files
 
 Folder <b>src/resources</b> contains config files for this Spring application.
