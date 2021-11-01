@@ -54,7 +54,7 @@ Go to the root directory of the application and type:
 
 ```
 $ chmod +x mvnw
-$ ./mvnw spring-boot:run
+$ ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 #### Using Executable Jar
@@ -68,7 +68,7 @@ $ ./mvnw clean package
 Then you can run the JAR file
 
 ```
-$ java -jar target/watchers-1.0.war
+$ java -jar -Dspring.profiles.active=dev target/watchers-1.0.war
 ```
 
 ### Maven
@@ -97,7 +97,7 @@ Applications run in an exploded form, as they do in your IDE. The following exam
 a Spring Boot application:
 
 ```
-$ mvn spring-boot:run
+$ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 ### Using Executable Jar
@@ -111,7 +111,7 @@ $ mvn clean package
 Then you can run the JAR file
 
 ```
-$ java -jar target/watchers-1.0.war
+$ java -jar -Dspring.profiles.active=dev target/watchers-1.0.war
 ```
 
 ### Tests
