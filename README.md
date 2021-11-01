@@ -114,6 +114,13 @@ Then you can run the JAR file
 $ java -jar -Dspring.profiles.active=dev target/watchers-1.0.war
 ```
 
+### Using Docker
+```
+$ mvn clean package 
+$ docker build -t watchers/watchers .
+$ docker run -p 48080:48080 watchers/watchers
+```
+
 ### Tests
 Tests can be run by executing the following command from the root directory of the application
 ```
