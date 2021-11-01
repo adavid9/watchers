@@ -5,17 +5,15 @@ import com.dawidantecki.watchers.data.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class MovieService {
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(final MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
