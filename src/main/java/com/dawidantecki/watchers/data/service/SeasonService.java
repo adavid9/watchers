@@ -5,18 +5,16 @@ import com.dawidantecki.watchers.data.repository.SeasonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class SeasonService {
 
-    private SeasonRepository seasonRepository;
-    private EpisodeService episodeService;
+    private final SeasonRepository seasonRepository;
+    private final EpisodeService episodeService;
 
     @Autowired
-    public SeasonService(SeasonRepository seasonRepository, EpisodeService episodeService) {
+    public SeasonService(final SeasonRepository seasonRepository, final EpisodeService episodeService) {
         this.seasonRepository = seasonRepository;
         this.episodeService = episodeService;
     }
@@ -57,7 +55,7 @@ public class SeasonService {
         deleteSeasonById(season.getId());
     }
 
-    public void deleteOperation(Season season) {
+    private void deleteOperation(Season season) {
         if (season == null)
             return;
 
