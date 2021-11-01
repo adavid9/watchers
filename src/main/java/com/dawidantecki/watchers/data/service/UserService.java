@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -35,14 +34,6 @@ public class UserService {
         }
     }
 
-    public User findByEmail(String email) {
-        try {
-            return userRepository.findByEmail(email);
-        } catch (NullPointerException npe) {
-            return null;
-        }
-    }
-
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -51,13 +42,8 @@ public class UserService {
         if (user == null)
             return;
         User byLogin = userRepository.findByUsername(user.getUsername());
-        User byEmail = userRepository.findByEmail(user.getEmail());
-        boolean exists = false;
-        if (byLogin != null || byEmail != null) {
-            exists = true;
-        }
 
-        if (exists) {
+        if (byLogin != null) {
             byLogin.setUsername(user.getUsername());
             byLogin.setEmail(user.getEmail());
             byLogin.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -70,14 +56,6 @@ public class UserService {
         }
     }
 
-    public void addUser(Collection<User> users) {
-        if ((users != null) && (users.size() > 0))
-            users.forEach(x -> {
-                if (x != null)
-                    addUser(x);
-            });
-    }
-
     public void deleteUser(long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null)
@@ -86,23 +64,7 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void deleteUser(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null)
-            return;
-
-        deleteUser(user.getId());
-    }
-
     public void deleteUser(User user) {
         deleteUser(user.getId());
-    }
-
-    public void deleteUser(Collection<User> users) {
-        if (users.size() > 0)
-            users.forEach(x -> {
-                if (x != null)
-                    deleteUser(x.getId());
-            });
     }
 }

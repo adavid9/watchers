@@ -51,24 +51,4 @@ public class RoleService {
     public List<Role> findAll() {
         return roleRepository.findAll();
     }
-
-    public void deleteRole(Role role) {
-        if (role == null)
-            return;
-        roleRepository.delete(role);
-    }
-
-    public void deleteRole(long id) {
-        Role role = roleRepository.findById(id).orElse(null);
-        if (role == null)
-            return;
-        roleRepository.delete(role);
-    }
-
-    public void deleteRole(RoleName name) {
-        Role role = roleRepository.findByRoleName(name);
-        if (role == null)
-            return;
-        deleteRole(role.getId());
-    }
 }
