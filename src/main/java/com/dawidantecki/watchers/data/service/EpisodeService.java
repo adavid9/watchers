@@ -9,13 +9,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class EpisodeService {
 
-    private EpisodeRepository episodeRepository;
+    private final EpisodeRepository episodeRepository;
 
     @Autowired
-    public EpisodeService(EpisodeRepository episodeRepository) {
+    public EpisodeService(final EpisodeRepository episodeRepository) {
         this.episodeRepository = episodeRepository;
     }
 
