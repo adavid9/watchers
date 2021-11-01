@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(final UserRepository userRepository,
+                       final BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -27,11 +26,7 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        try {
-            return userRepository.findByUsername(username);
-        } catch (NullPointerException npe) {
-            return null;
-        }
+        return userRepository.findByUsername(username);
     }
 
     public List<User> findAll() {
